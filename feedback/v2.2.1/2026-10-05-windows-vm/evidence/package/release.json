@@ -1,0 +1,17 @@
+{
+  "version": "2.2.1",
+  "bundleId": "v221-release-019",
+  "candidateId": "v221-product-019",
+  "sourceCommit": "9896fdb108bb2479827fd68c36a4375e2e7376d0",
+  "installerSourceCommit": "9896fdb108bb2479827fd68c36a4375e2e7376d0",
+  "createdAt": "2026-10-04T18:16:28.145Z",
+  "prerequisite": {
+    "name": ".NET Framework 4.8",
+    "file": "prerequisites/NDP48-x86-x64-AllOS-ENU.exe",
+    "bytes": 121346568,
+    "sha256": "0a3a390c47e639d0f7fc65b21195fee6b7f65b066f80f70c60fab191d14b7e40",
+    "source": "https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48"
+  },
+  "payloadSha256": "e8ffe8040e4820bb2015fc67db82940a1983390c2c3672f432ac67561e18739b",
+  "setupSha256": "d6d6bd29da068c6013faeeb6e241c19bac6049b45840a0001d15447b086d7c39"
+}

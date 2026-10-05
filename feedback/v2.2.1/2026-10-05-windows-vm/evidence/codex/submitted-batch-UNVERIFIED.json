@@ -1,0 +1,152 @@
+{
+  "expectedContext": {
+    "applicationPath": "Device/Plc Logic/Application",
+    "projectEpoch": 2,
+    "watcherInstanceId": "77ea9cb4949f4fdcaf87e08a0fb420b0"
+  },
+  "requestId": "codex-temp-build-01",
+  "changes": [
+    {
+      "kind": "addLibrary",
+      "objectPath": "Device/Plc Logic/Application/Library Manager",
+      "readRef": "read-24000a90-ef6c-4030-93ff-f6aac225f6cf",
+      "library": {
+        "name": "Util",
+        "version": "3.5.19.0",
+        "company": "System"
+      },
+      "namespace": "Util"
+    },
+    {
+      "kind": "createPou",
+      "parentPath": "Device/Plc Logic/Application",
+      "name": "FB_TemperatureControl",
+      "pouType": "FUNCTION_BLOCK",
+      "declarationCode": "FUNCTION_BLOCK FB_TemperatureControl\nVAR_INPUT\n    rTarget_C : REAL := 60.0; // 目标温度，测试允许范围为 0 至 150 摄氏度\n    rFeedback_C : REAL := 20.0; // 反馈温度，测试有效范围为 -50 至 200 摄氏度\n    xEnable : BOOL := FALSE; // 使能加热控制；关闭时输出为零并复位积分\n    xReset : BOOL := FALSE; // 复位期间输出为零，输入恢复正常后可清除锁存故障\n    xSensorFault : BOOL := FALSE; // 外部反馈故障标记；本测试不连接实体传感器\nEND_VAR\nVAR_OUTPUT\n    rOutput_pct : REAL := 0.0; // 加热输出百分比，始终限制在 0 至 100\n    xFault : BOOL := FALSE; // 输入异常或控制器溢出时锁存，需有效输入及复位才能清除\n    xLimited : BOOL := FALSE; // 官方控制器当前是否处于输出限幅\nEND_VAR\nVAR\n    fbPID : Util.PID_FIXCYCLE; // 官方固定周期控制器，每 10ms 只调用一次\n    xInputValid : BOOL; // 温度范围和反馈状态有效性\n    xSafeReset : BOOL; // 停用、复位、故障或首次调用时复位控制器\n    xInitialized : BOOL := FALSE; // 首次调用先复位，避免沿用不明确的积分初值\n    rActualSafe_C : REAL; // 传给官方控制器的有效反馈，异常时使用零\n    rTargetSafe_C : REAL; // 传给官方控制器的有效目标，异常时使用零\nEND_VAR\nVAR CONSTANT\n    rCycle_s : REAL := 0.01; // 固定周期为 10ms，必须与 MainTask 一致\n    rKp : REAL := 2.0; // 比例增益，测试初值为每摄氏度 2% 输出\n    rTn_s : REAL := 20.0; // 积分时间为 20 秒，仅为模拟对象提供测试初值\n    rTv_s : REAL := 0.5; // 微分时间为 0.5 秒，未对实体设备整定\nEND_VAR",
+      "implementationCode": "// 先确认输入处于测试有效范围；范围判断也阻止非正常数值进入控制器。\nxInputValid := NOT xSensorFault\n    AND (rTarget_C >= 0.0) AND (rTarget_C <= 150.0)\n    AND (rFeedback_C >= -50.0) AND (rFeedback_C <= 200.0);\n\n// 故障保持锁存；只有反馈恢复有效且明确复位时才清除。\nIF NOT xInputValid THEN\n    xFault := TRUE;\nELSIF xReset THEN\n    xFault := FALSE;\nEND_IF;\n\nrActualSafe_C := 0.0;\nrTargetSafe_C := 0.0;\nIF xInputValid THEN\n    rActualSafe_C := rFeedback_C;\n    rTargetSafe_C := rTarget_C;\nEND_IF;\n\nxSafeReset := NOT xEnable OR xReset OR xFault OR NOT xInitialized;\n\n// 每个 10ms 周期只执行一次官方算法；停用和故障时复位积分并保持零输出。\nfbPID(\n    ACTUAL := rActualSafe_C,\n    SET_POINT := rTargetSafe_C,\n    KP := rKp,\n    TN := rTn_s,\n    TV := rTv_s,\n    Y_MANUAL := 0.0,\n    Y_OFFSET := 0.0,\n    Y_MIN := 0.0,\n    Y_MAX := 100.0,\n    MANUAL := xSafeReset,\n    RESET := xSafeReset,\n    CYCLE := rCycle_s\n);\nxInitialized := TRUE;\n\n// 当周期发现溢出或异常输出立即停热；下周期继续复位官方控制器。\nIF fbPID.OVERFLOW OR NOT ((fbPID.Y >= 0.0) AND (fbPID.Y <= 100.0)) THEN\n    xFault := TRUE;\nEND_IF;\n\nrOutput_pct := 0.0;\nxLimited := FALSE;\nIF xEnable AND NOT xReset AND NOT xSafeReset AND NOT xFault THEN\n    rOutput_pct := LIMIT(0.0, fbPID.Y, 100.0);\n    xLimited := fbPID.LIMITS_ACTIVE;\nEND_IF;"
+    },
+    {
+      "kind": "createPou",
+      "parentPath": "Device/Plc Logic/Application",
+      "name": "PRG_Temperature_PID",
+      "pouType": "PROGRAM",
+      "declarationCode": "PROGRAM PRG_Temperature_PID\nVAR\n    rTarget_C : REAL := 60.0; // 目标温度，Trace 的第一条温度曲线\n    rFeedback_C : REAL := 20.0; // 反馈温度，默认来自下方测试模拟对象\n    rOutput_pct : REAL := 0.0; // 输出百分比，Trace 单独显示 0 至 100\n    xEnable : BOOL := TRUE; // 测试控制使能，关闭后加热输出为零\n    xReset : BOOL := FALSE; // 人工复位测试开关，保持期间输出为零\n    xSensorFault : BOOL := FALSE; // 测试用故障注入，不对应实体输入\n    xSimulate : BOOL := TRUE; // 明确为测试模拟；关闭后可人工设置反馈变量\n    xFault : BOOL := FALSE; // 温控模块锁存的故障状态\n    xLimited : BOOL := FALSE; // 温控输出限幅状态\n    fbTemperature : FB_TemperatureControl; // 本程序内唯一的温控实例\n    rSimTemperature_C : REAL := 20.0; // 一阶测试温度对象的跨周期状态\nEND_VAR\nVAR CONSTANT\n    rCycle_s : REAL := 0.01; // MainTask 固定 10ms，模拟步长与控制周期一致\n    rAmbient_C : REAL := 20.0; // 测试模拟环境温度为 20 摄氏度\n    rPlantTau_s : REAL := 20.0; // 测试模拟时间常数为 20 秒\n    rPlantGain_C_per_pct : REAL := 1.0; // 测试模型中每 1% 输出使稳态温度升高 1 摄氏度\nEND_VAR",
+      "implementationCode": "// 仅测试模拟：一阶加热对象使用上一周期输出，所有变量都未映射实体 I/O。\nIF xReset THEN\n    rSimTemperature_C := rAmbient_C;\nELSIF xSimulate THEN\n    rSimTemperature_C := rSimTemperature_C + rCycle_s / rPlantTau_s\n        * (rAmbient_C + rPlantGain_C_per_pct * rOutput_pct - rSimTemperature_C);\nEND_IF;\n\nIF xSimulate THEN\n    rFeedback_C := rSimTemperature_C;\nEND_IF;\n\n// MainTask 每 10ms 只调用本程序一次，本程序也只调用温控实例一次。\nfbTemperature(\n    rTarget_C := rTarget_C,\n    rFeedback_C := rFeedback_C,\n    xEnable := xEnable,\n    xReset := xReset,\n    xSensorFault := xSensorFault\n);\nrOutput_pct := fbTemperature.rOutput_pct;\nxFault := fbTemperature.xFault;\nxLimited := fbTemperature.xLimited;"
+    },
+    {
+      "kind": "setTask",
+      "objectPath": "Device/Plc Logic/Application/Task Configuration/MainTask",
+      "readRef": "read-560cb7e8-867b-404e-bf70-2191457f155c",
+      "interval": "t#10ms",
+      "priority": 1
+    },
+    {
+      "kind": "setTaskPous",
+      "objectPath": "Device/Plc Logic/Application/Task Configuration/MainTask",
+      "readRef": "read-560cb7e8-867b-404e-bf70-2191457f155c",
+      "pous": [
+        {
+          "objectPath": "Device/Plc Logic/Application/PRG_Temperature_PID",
+          "comment": "固定 10ms 调用温控测试程序；唯一 PID 调用入口"
+        }
+      ]
+    },
+    {
+      "kind": "createTrace",
+      "parentPath": "Device/Plc Logic/Application",
+      "name": "Trace_Temperature_PID",
+      "config": {
+        "taskPath": "Device/Plc Logic/Application/Task Configuration/MainTask",
+        "variables": [
+          {
+            "variable": "PRG_Temperature_PID.rTarget_C",
+            "enabled": true
+          },
+          {
+            "variable": "PRG_Temperature_PID.rFeedback_C",
+            "enabled": true
+          },
+          {
+            "variable": "PRG_Temperature_PID.rOutput_pct",
+            "enabled": true
+          }
+        ],
+        "resolution": "ms",
+        "everyNCycles": 1,
+        "autoStart": false,
+        "recordCondition": "",
+        "comment": "离线温控测试 Trace：每 10ms 采样；温度同图、输出百分比单图；尚未在线运行",
+        "trigger": {
+          "enabled": false,
+          "variable": "",
+          "edge": "undefined",
+          "level": 0,
+          "postTriggerSamples": 0
+        },
+        "display": {
+          "mode": "explicit",
+          "groups": [
+            {
+              "name": "温度",
+              "visible": true,
+              "axis": {
+                "mode": "Auto",
+                "description": "温度 / °C",
+                "drawDescription": true,
+                "drawGrid": true
+              },
+              "variables": [
+                {
+                  "variable": "PRG_Temperature_PID.rTarget_C",
+                  "visible": true
+                },
+                {
+                  "variable": "PRG_Temperature_PID.rFeedback_C",
+                  "visible": true
+                }
+              ]
+            },
+            {
+              "name": "输出",
+              "visible": true,
+              "axis": {
+                "mode": "Fixed",
+                "minimum": 0,
+                "maximum": 100,
+                "description": "输出 / %",
+                "drawDescription": true,
+                "drawGrid": true
+              },
+              "variables": [
+                {
+                  "variable": "PRG_Temperature_PID.rOutput_pct",
+                  "visible": true
+                }
+              ]
+            }
+          ],
+          "styles": [
+            {
+              "variable": "PRG_Temperature_PID.rTarget_C",
+              "graphType": "LINES",
+              "graphColor": -65536
+            },
+            {
+              "variable": "PRG_Temperature_PID.rFeedback_C",
+              "graphType": "LINES",
+              "graphColor": -16776961
+            },
+            {
+              "variable": "PRG_Temperature_PID.rOutput_pct",
+              "graphType": "LINES",
+              "graphColor": -16744448
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "compileAfter": true,
+  "saveAfterCompile": true,
+  "waitMs": 20000
+}

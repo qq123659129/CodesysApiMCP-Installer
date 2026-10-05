@@ -1,0 +1,2165 @@
+{
+  "tools": [
+    {
+      "name": "codesys_status",
+      "description": "Read cached connection, project, queue, capabilities and codingStandards settings/rules/revision without CODESYS API calls. Read this first: enabled coding rules are enforced by MCP without Skills. Use context for engineering requests.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "codesys_project_query",
+      "description": "Query the current project structure, search, applications or I/O. Use summary=true or pageBytes (4096..262144) for fixed structure/search pages; continue with cursor. Read-only and queued.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+          },
+          "expectedContext": {
+            "type": "object",
+            "properties": {
+              "watcherInstanceId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "projectEpoch": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "applicationPath": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "watcherInstanceId",
+              "projectEpoch"
+            ],
+            "additionalProperties": false
+          },
+          "applicationPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "waitMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20000
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "structure",
+              "search",
+              "applications",
+              "io"
+            ]
+          },
+          "rootPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "searchIn": {
+            "type": "string",
+            "enum": [
+              "paths",
+              "code",
+              "both"
+            ]
+          },
+          "depth": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 64
+          },
+          "summary": {
+            "type": "boolean"
+          },
+          "pageBytes": {
+            "type": "integer",
+            "minimum": 4096,
+            "maximum": 262144
+          },
+          "cursor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "codesys_object_read",
+      "description": "Read objects in one native request. Follow nextCursor; pageBytes (4096..262144) bounds the complete MCP result. format=code delivers directly readable code chunks; sections selects a partial view without editing refs. Full objects/configuration receive readRef only after complete delivery. Old JSON/cursor calls remain supported.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+          },
+          "expectedContext": {
+            "type": "object",
+            "properties": {
+              "watcherInstanceId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "projectEpoch": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "applicationPath": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "watcherInstanceId",
+              "projectEpoch"
+            ],
+            "additionalProperties": false
+          },
+          "applicationPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "waitMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20000
+          },
+          "objectPaths": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            }
+          },
+          "cursor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "pageBytes": {
+            "type": "integer",
+            "minimum": 4096,
+            "maximum": 262144
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "json",
+              "code"
+            ]
+          },
+          "sections": {
+            "minItems": 1,
+            "maxItems": 2,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "declaration",
+                "implementation"
+              ]
+            }
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "codesys_project_apply",
+      "description": "Submit one ordered feature as changes[] with one Watcher command. Existing objects require readRef; patches must match exactly once. Read codesys_status.codingStandards first: enabled rules require Chinese semantic comments near interfaces/state/critical nodes, type naming and 120-character lines; diagnostics identify section/line/repairHint. No Skill required. Trace config.display supports auto grouping or explicit diagrams with visible variable associations and Auto/Fixed axes. Put compileAfter/saveAfterCompile at batch root. Compile once after changes, save only when requested. Stops on failure, preserves prior effects, never replays unknown effects.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+          },
+          "expectedContext": {
+            "type": "object",
+            "properties": {
+              "watcherInstanceId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "projectEpoch": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "applicationPath": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "watcherInstanceId",
+              "projectEpoch"
+            ],
+            "additionalProperties": false
+          },
+          "applicationPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "waitMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20000
+          },
+          "changes": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "createPou"
+                        },
+                        "parentPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                        },
+                        "pouType": {
+                          "type": "string",
+                          "enum": [
+                            "PROGRAM",
+                            "FUNCTION_BLOCK",
+                            "FUNCTION"
+                          ]
+                        },
+                        "returnType": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "declarationCode": {
+                          "type": "string"
+                        },
+                        "implementationCode": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parentPath",
+                        "name",
+                        "pouType"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "createGvl"
+                        },
+                        "parentPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                        },
+                        "declarationCode": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parentPath",
+                        "name",
+                        "declarationCode"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "createDut"
+                        },
+                        "parentPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                        },
+                        "dutType": {
+                          "default": "Structure",
+                          "type": "string",
+                          "enum": [
+                            "Structure",
+                            "Enumeration",
+                            "Union",
+                            "Alias"
+                          ]
+                        },
+                        "declarationCode": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parentPath",
+                        "name",
+                        "dutType",
+                        "declarationCode"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "createFolder"
+                        },
+                        "parentPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parentPath",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "createInterface"
+                        },
+                        "parentPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                        },
+                        "declarationCode": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parentPath",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "createMethod"
+                        },
+                        "parentPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                        },
+                        "returnType": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "declarationCode": {
+                          "type": "string"
+                        },
+                        "implementationCode": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parentPath",
+                        "name"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "createProperty"
+                        },
+                        "parentPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                        },
+                        "returnType": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "declarationCode": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "parentPath",
+                        "name",
+                        "returnType"
+                      ],
+                      "additionalProperties": false,
+                      "description": "Creates a Property and its Get/Set children. Write accessor code with later setCode changes at <parentPath>/<name>/Get or /Set in this same batch; those new children need no readRef."
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "setCode"
+                        },
+                        "objectPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "readRef": {
+                          "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "mode": {
+                          "type": "string",
+                          "const": "replace"
+                        },
+                        "declarationCode": {
+                          "type": "string"
+                        },
+                        "implementationCode": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "objectPath",
+                        "mode"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "setCode"
+                        },
+                        "objectPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "readRef": {
+                          "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "mode": {
+                          "type": "string",
+                          "const": "patch"
+                        },
+                        "edits": {
+                          "minItems": 1,
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "section": {
+                                "type": "string",
+                                "enum": [
+                                  "declaration",
+                                  "implementation"
+                                ]
+                              },
+                              "search": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "replacement": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "section",
+                              "search",
+                              "replacement"
+                            ],
+                            "additionalProperties": false
+                          }
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "objectPath",
+                        "mode",
+                        "edits"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "rename"
+                        },
+                        "objectPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "readRef": {
+                          "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "newName": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 256,
+                          "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "objectPath",
+                        "newName"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "compileAfter": {
+                          "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "saveAfterCompile": {
+                          "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "const": "delete"
+                        },
+                        "objectPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "readRef": {
+                          "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "recursive": {
+                          "default": false,
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "objectPath",
+                        "recursive"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "compileAfter": {
+                      "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "saveAfterCompile": {
+                      "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "const": "createTask"
+                    },
+                    "parentPath": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "name": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 256,
+                      "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                    },
+                    "taskType": {
+                      "type": "string",
+                      "const": "cyclic"
+                    },
+                    "interval": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "priority": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 31
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "parentPath",
+                    "name",
+                    "taskType",
+                    "interval",
+                    "priority"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "compileAfter": {
+                      "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "saveAfterCompile": {
+                      "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "const": "setTask"
+                    },
+                    "objectPath": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "readRef": {
+                      "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "interval": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "priority": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 31
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "objectPath"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "compileAfter": {
+                      "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "saveAfterCompile": {
+                      "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "const": "setTaskPous"
+                    },
+                    "objectPath": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "readRef": {
+                      "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "pous": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "objectPath": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 4096
+                          },
+                          "comment": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "objectPath",
+                          "comment"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "objectPath",
+                    "pous"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "compileAfter": {
+                      "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "saveAfterCompile": {
+                      "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "const": "addLibrary"
+                    },
+                    "objectPath": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "readRef": {
+                      "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "library": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "version": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "company": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                        "company"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "namespace": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "objectPath",
+                    "library"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "compileAfter": {
+                      "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "saveAfterCompile": {
+                      "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "const": "removeLibrary"
+                    },
+                    "objectPath": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "readRef": {
+                      "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "library": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "version": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "company": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                        "company"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "objectPath",
+                    "library"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "compileAfter": {
+                      "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "saveAfterCompile": {
+                      "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "const": "updateLibrary"
+                    },
+                    "objectPath": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "readRef": {
+                      "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "library": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "version": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "company": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                        "company"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "replacement": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "version": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "company": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                        "company"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "namespace": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "objectPath",
+                    "library",
+                    "replacement"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "compileAfter": {
+                      "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "saveAfterCompile": {
+                      "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "const": "createTrace"
+                    },
+                    "parentPath": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "name": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 256,
+                      "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "taskPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "display": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "mode": {
+                                  "type": "string",
+                                  "const": "auto"
+                                },
+                                "hints": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "variable": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 4096,
+                                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                                      },
+                                      "unit": {
+                                        "type": "string",
+                                        "maxLength": 64
+                                      },
+                                      "dataType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "BOOL",
+                                          "REAL",
+                                          "LREAL",
+                                          "INT",
+                                          "DINT",
+                                          "UINT",
+                                          "UDINT",
+                                          "TIME",
+                                          "UNKNOWN"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "variable"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "styles": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "variable": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 4096,
+                                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                                      },
+                                      "graphType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "NOTYPE",
+                                          "LINES_POINTS",
+                                          "CROSSES",
+                                          "CURVES",
+                                          "STEPS_POINTS",
+                                          "POINTS",
+                                          "CIRCLE_CROSSES",
+                                          "BOXPOINTS",
+                                          "LINES",
+                                          "STEPS",
+                                          "LINES_CROSSES",
+                                          "STEPS_CROSSES"
+                                        ]
+                                      },
+                                      "graphColor": {
+                                        "type": "integer",
+                                        "minimum": -2147483648,
+                                        "maximum": 4294967295
+                                      }
+                                    },
+                                    "required": [
+                                      "variable"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                }
+                              },
+                              "required": [
+                                "mode"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "mode": {
+                                  "type": "string",
+                                  "const": "explicit"
+                                },
+                                "groups": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256,
+                                        "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                                      },
+                                      "visible": {
+                                        "type": "boolean"
+                                      },
+                                      "axis": {
+                                        "type": "object",
+                                        "properties": {
+                                          "mode": {
+                                            "type": "string",
+                                            "enum": [
+                                              "Auto",
+                                              "Fixed"
+                                            ]
+                                          },
+                                          "minimum": {
+                                            "type": "number"
+                                          },
+                                          "maximum": {
+                                            "type": "number"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "drawGrid": {
+                                            "type": "boolean"
+                                          },
+                                          "drawDescription": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "required": [
+                                          "mode"
+                                        ],
+                                        "additionalProperties": false
+                                      },
+                                      "variables": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "variable": {
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 4096,
+                                              "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                                            },
+                                            "visible": {
+                                              "type": "boolean"
+                                            }
+                                          },
+                                          "required": [
+                                            "variable",
+                                            "visible"
+                                          ],
+                                          "additionalProperties": false
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "name",
+                                      "visible",
+                                      "axis",
+                                      "variables"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "styles": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "variable": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 4096,
+                                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                                      },
+                                      "graphType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "NOTYPE",
+                                          "LINES_POINTS",
+                                          "CROSSES",
+                                          "CURVES",
+                                          "STEPS_POINTS",
+                                          "POINTS",
+                                          "CIRCLE_CROSSES",
+                                          "BOXPOINTS",
+                                          "LINES",
+                                          "STEPS",
+                                          "LINES_CROSSES",
+                                          "STEPS_CROSSES"
+                                        ]
+                                      },
+                                      "graphColor": {
+                                        "type": "integer",
+                                        "minimum": -2147483648,
+                                        "maximum": 4294967295
+                                      }
+                                    },
+                                    "required": [
+                                      "variable"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                }
+                              },
+                              "required": [
+                                "mode",
+                                "groups"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ],
+                          "description": "MCP configures native diagrams and axes. Auto groups by supplied unit/type hints or documented name heuristics; PLC symbol types are not resolved. Explicit groups cover each recording variable exactly once. Omit on update to preserve existing display and attach new unbound variables. Creation defaults to auto."
+                        },
+                        "variables": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "variable": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 4096,
+                                "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                              },
+                              "enabled": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "variable",
+                              "enabled"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "description": "Supply the complete desired ordered variable bindings. Add, remove, replace or reorder bindings; [] removes all variables. Retained bindings preserve their native settings and diagram associations. Submit a later modification separately after reading newly created native defaults."
+                        },
+                        "resolution": {
+                          "type": "string",
+                          "enum": [
+                            "ms",
+                            "us"
+                          ]
+                        },
+                        "everyNCycles": {
+                          "type": "integer",
+                          "exclusiveMinimum": 0,
+                          "maximum": 2147483647
+                        },
+                        "bufferPerVariable": {
+                          "description": "Omit to preserve the actual native buffer size, including the factory default on creation.",
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 1000000
+                        },
+                        "refreshDurationMs": {
+                          "description": "Omit to preserve the actual native refresh duration.",
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 2147483647
+                        },
+                        "autoStart": {
+                          "type": "boolean"
+                        },
+                        "recordCondition": {
+                          "type": "string",
+                          "description": "Retain the existing expression, clear it, or bind a simple ASCII variable instance path."
+                        },
+                        "comment": {
+                          "type": "string"
+                        },
+                        "trigger": {
+                          "type": "object",
+                          "properties": {
+                            "enabled": {
+                              "type": "boolean"
+                            },
+                            "variable": {
+                              "type": "string",
+                              "description": "Retain the existing expression, clear it, or bind a simple ASCII variable instance path."
+                            },
+                            "edge": {
+                              "type": "string",
+                              "enum": [
+                                "undefined",
+                                "positive",
+                                "negative",
+                                "both"
+                              ]
+                            },
+                            "level": {
+                              "anyOf": [
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "postTriggerSamples": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 2147483647
+                            }
+                          },
+                          "required": [
+                            "enabled",
+                            "variable",
+                            "edge",
+                            "level",
+                            "postTriggerSamples"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "taskPath",
+                        "variables",
+                        "resolution",
+                        "everyNCycles",
+                        "autoStart",
+                        "recordCondition",
+                        "comment",
+                        "trigger"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "parentPath",
+                    "name",
+                    "config"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Create one offline Trace under the selected existing Application with a unique existing Task. Configure variables in this creation change; read the created Trace before a later separate modification."
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "compileAfter": {
+                      "description": "Prefer compileAfter at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "saveAfterCompile": {
+                      "description": "Prefer saveAfterCompile at the batch root. A change-level value is hoisted only when every supplied value agrees.",
+                      "type": "boolean"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "const": "setTrace"
+                    },
+                    "objectPath": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "readRef": {
+                      "description": "Required for objects existing before this batch; omit only for an object created earlier in this batch.",
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "taskPath": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4096
+                        },
+                        "display": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "mode": {
+                                  "type": "string",
+                                  "const": "auto"
+                                },
+                                "hints": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "variable": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 4096,
+                                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                                      },
+                                      "unit": {
+                                        "type": "string",
+                                        "maxLength": 64
+                                      },
+                                      "dataType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "BOOL",
+                                          "REAL",
+                                          "LREAL",
+                                          "INT",
+                                          "DINT",
+                                          "UINT",
+                                          "UDINT",
+                                          "TIME",
+                                          "UNKNOWN"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "variable"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "styles": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "variable": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 4096,
+                                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                                      },
+                                      "graphType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "NOTYPE",
+                                          "LINES_POINTS",
+                                          "CROSSES",
+                                          "CURVES",
+                                          "STEPS_POINTS",
+                                          "POINTS",
+                                          "CIRCLE_CROSSES",
+                                          "BOXPOINTS",
+                                          "LINES",
+                                          "STEPS",
+                                          "LINES_CROSSES",
+                                          "STEPS_CROSSES"
+                                        ]
+                                      },
+                                      "graphColor": {
+                                        "type": "integer",
+                                        "minimum": -2147483648,
+                                        "maximum": 4294967295
+                                      }
+                                    },
+                                    "required": [
+                                      "variable"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                }
+                              },
+                              "required": [
+                                "mode"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "mode": {
+                                  "type": "string",
+                                  "const": "explicit"
+                                },
+                                "groups": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 256,
+                                        "pattern": "^[^/\\\\\\u0000-\\u001f]+$"
+                                      },
+                                      "visible": {
+                                        "type": "boolean"
+                                      },
+                                      "axis": {
+                                        "type": "object",
+                                        "properties": {
+                                          "mode": {
+                                            "type": "string",
+                                            "enum": [
+                                              "Auto",
+                                              "Fixed"
+                                            ]
+                                          },
+                                          "minimum": {
+                                            "type": "number"
+                                          },
+                                          "maximum": {
+                                            "type": "number"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "drawGrid": {
+                                            "type": "boolean"
+                                          },
+                                          "drawDescription": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "required": [
+                                          "mode"
+                                        ],
+                                        "additionalProperties": false
+                                      },
+                                      "variables": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "variable": {
+                                              "type": "string",
+                                              "minLength": 1,
+                                              "maxLength": 4096,
+                                              "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                                            },
+                                            "visible": {
+                                              "type": "boolean"
+                                            }
+                                          },
+                                          "required": [
+                                            "variable",
+                                            "visible"
+                                          ],
+                                          "additionalProperties": false
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "name",
+                                      "visible",
+                                      "axis",
+                                      "variables"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "styles": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "variable": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 4096,
+                                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                                      },
+                                      "graphType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "NOTYPE",
+                                          "LINES_POINTS",
+                                          "CROSSES",
+                                          "CURVES",
+                                          "STEPS_POINTS",
+                                          "POINTS",
+                                          "CIRCLE_CROSSES",
+                                          "BOXPOINTS",
+                                          "LINES",
+                                          "STEPS",
+                                          "LINES_CROSSES",
+                                          "STEPS_CROSSES"
+                                        ]
+                                      },
+                                      "graphColor": {
+                                        "type": "integer",
+                                        "minimum": -2147483648,
+                                        "maximum": 4294967295
+                                      }
+                                    },
+                                    "required": [
+                                      "variable"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                }
+                              },
+                              "required": [
+                                "mode",
+                                "groups"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ],
+                          "description": "MCP configures native diagrams and axes. Auto groups by supplied unit/type hints or documented name heuristics; PLC symbol types are not resolved. Explicit groups cover each recording variable exactly once. Omit on update to preserve existing display and attach new unbound variables. Creation defaults to auto."
+                        },
+                        "variables": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "variable": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 4096,
+                                "pattern": "^[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*(?:\\.[A-Za-z_][A-Za-z0-9_]*(?:\\[[0-9]+(?:,[0-9]+)*\\])*)*$(?![\\s\\S])"
+                              },
+                              "enabled": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "variable",
+                              "enabled"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "description": "Supply the complete desired ordered variable bindings. Add, remove, replace or reorder bindings; [] removes all variables. Retained bindings preserve their native settings and diagram associations. Submit a later modification separately after reading newly created native defaults."
+                        },
+                        "resolution": {
+                          "type": "string",
+                          "enum": [
+                            "ms",
+                            "us"
+                          ]
+                        },
+                        "everyNCycles": {
+                          "type": "integer",
+                          "exclusiveMinimum": 0,
+                          "maximum": 2147483647
+                        },
+                        "bufferPerVariable": {
+                          "description": "Omit to preserve the actual native buffer size, including the factory default on creation.",
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 1000000
+                        },
+                        "refreshDurationMs": {
+                          "description": "Omit to preserve the actual native refresh duration.",
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 2147483647
+                        },
+                        "autoStart": {
+                          "type": "boolean"
+                        },
+                        "recordCondition": {
+                          "type": "string",
+                          "description": "Retain the existing expression, clear it, or bind a simple ASCII variable instance path."
+                        },
+                        "comment": {
+                          "type": "string"
+                        },
+                        "trigger": {
+                          "type": "object",
+                          "properties": {
+                            "enabled": {
+                              "type": "boolean"
+                            },
+                            "variable": {
+                              "type": "string",
+                              "description": "Retain the existing expression, clear it, or bind a simple ASCII variable instance path."
+                            },
+                            "edge": {
+                              "type": "string",
+                              "enum": [
+                                "undefined",
+                                "positive",
+                                "negative",
+                                "both"
+                              ]
+                            },
+                            "level": {
+                              "anyOf": [
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "postTriggerSamples": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 2147483647
+                            }
+                          },
+                          "required": [
+                            "enabled",
+                            "variable",
+                            "edge",
+                            "level",
+                            "postTriggerSamples"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "taskPath",
+                        "variables",
+                        "resolution",
+                        "everyNCycles",
+                        "autoStart",
+                        "recordCondition",
+                        "comment",
+                        "trigger"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "objectPath",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "compileAfter": {
+            "default": true,
+            "type": "boolean"
+          },
+          "saveAfterCompile": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "requestId",
+          "expectedContext",
+          "changes",
+          "compileAfter",
+          "saveAfterCompile"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "codesys_project_compile",
+      "description": "Explicitly compile the current project once, without saving. Do not repeat a compile already performed by an apply batch.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+          },
+          "expectedContext": {
+            "type": "object",
+            "properties": {
+              "watcherInstanceId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "projectEpoch": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "applicationPath": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "watcherInstanceId",
+              "projectEpoch"
+            ],
+            "additionalProperties": false
+          },
+          "applicationPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "waitMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20000
+          }
+        },
+        "required": [
+          "requestId",
+          "expectedContext"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "codesys_project_file",
+      "description": "Explicitly save, save_as, or create a new project from the product template matching the actual connected IDE version/profile. create and save_as require a new targetPath and never overwrite. create allows an empty IDE and requires the current project to be saved.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+          },
+          "expectedContext": {
+            "type": "object",
+            "properties": {
+              "watcherInstanceId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "projectEpoch": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "applicationPath": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "watcherInstanceId",
+              "projectEpoch"
+            ],
+            "additionalProperties": false
+          },
+          "applicationPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "waitMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20000
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "save",
+              "save_as",
+              "create"
+            ]
+          },
+          "targetPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "requestId",
+          "expectedContext",
+          "action"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "codesys_request",
+      "description": "Observe the original queued/running/terminal request, with optional waitMs (0..20000, default 0), or cancel it only while queued. Engineering submissions also accept waitMs (default 1000). Waiting never replays the request; UNKNOWN only recovers the original result.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "status",
+              "cancel"
+            ]
+          },
+          "requestId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+          },
+          "waitMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20000
+          }
+        },
+        "required": [
+          "action",
+          "requestId"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "codesys_library_query",
+      "description": "Read referenced or installed libraries, search or inspect an exact library identity. Use summary=true or pageBytes for installed/search pages and cursor to continue the fixed snapshot. Does not modify references or open a different project.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+          },
+          "expectedContext": {
+            "type": "object",
+            "properties": {
+              "watcherInstanceId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "projectEpoch": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "applicationPath": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "watcherInstanceId",
+              "projectEpoch"
+            ],
+            "additionalProperties": false
+          },
+          "applicationPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "waitMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20000
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "references",
+              "installed",
+              "search",
+              "details"
+            ]
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "library": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              },
+              "company": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "name",
+              "version",
+              "company"
+            ],
+            "additionalProperties": false
+          },
+          "summary": {
+            "type": "boolean"
+          },
+          "pageBytes": {
+            "type": "integer",
+            "minimum": 4096,
+            "maximum": 262144
+          },
+          "cursor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false
+      }
+    }
+  ]
+}

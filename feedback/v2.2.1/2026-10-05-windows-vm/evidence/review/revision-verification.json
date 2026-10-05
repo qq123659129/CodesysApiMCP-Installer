@@ -1,0 +1,48 @@
+{
+  "reviewedAt": "2026-10-05T01:40:36.683Z",
+  "scope": "Source and evidence consistency only. This is not a CODESYS compilation or engineering acceptance.",
+  "codeChecks": [
+    {
+      "file": "projects/codex/unverified-source/FB_TemperatureControl.st",
+      "onlyCommentsChanged": true,
+      "nonCommentCodeMatchesOriginalSubmission": true
+    },
+    {
+      "file": "projects/codex/unverified-source/PRG_Temperature_PID.st",
+      "onlyCommentsChanged": true,
+      "nonCommentCodeMatchesOriginalSubmission": true
+    }
+  ],
+  "officialLibrarySubmitted": {
+    "name": "Util",
+    "version": "3.5.19.0",
+    "company": "System"
+  },
+  "officialPidType": "Util.PID_FIXCYCLE",
+  "officialPidCallCountInSubmittedWrapper": 1,
+  "cycleSeconds": 0.01,
+  "liveReadSucceeded": false,
+  "ownQueuedReadCancelledWithoutDispatch": true,
+  "cancellationEvidence": "evidence/revision-20261005/codesys_request-2026-10-05T01-37-12-105Z.json",
+  "installedDeviceDirectories": [
+    {
+      "path": "C:\\ProgramData\\CODESYS\\Devices\\4096\\0000 0001",
+      "installedVersionDirectories": [
+        "3.5.19.50"
+      ]
+    },
+    {
+      "path": "C:\\ProgramData\\CODESYS\\Devices\\4096\\0000 0002",
+      "installedVersionDirectories": [
+        "3.5.19.50"
+      ]
+    }
+  ],
+  "projectFile": {
+    "path": "D:\\CodesysApiMCP-V2\\V2.2.1\\projects\\codex\\TemperaturePID_Codex.project",
+    "sizeBytes": 225552,
+    "lastWriteTimeUtc": "2026-10-05T01:14:52.192Z"
+  },
+  "engineeringAcceptancePassed": false,
+  "runtimeValidated": false
+}

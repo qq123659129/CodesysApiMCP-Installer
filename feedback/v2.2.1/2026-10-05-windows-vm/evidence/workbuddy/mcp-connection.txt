@@ -1,0 +1,10 @@
+codesys-v22:
+  Scope: user
+  Status: ✓ Connected
+  Type: stdio
+  Command: D:\CodesysApiMCP-V2\V2.2.1\installed\runtime\node.exe
+  Args: D:\CodesysApiMCP-V2\V2.2.1\installed\dist\bin.js
+  Env:
+    CODESYS_API_MCP_V22_HOME=D:\CodesysApiMCP-V2\V2.2.1\data
+
+To remove this server, run: codebuddy mcp remove "codesys-v22" -s user

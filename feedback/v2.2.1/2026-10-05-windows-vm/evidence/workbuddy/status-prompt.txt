@@ -1,0 +1,1 @@
+仅做只读接入测试。请只调用已配置的 codesys-v22 的 codesys_status 一次，报告发现工具、调用结果和 CODESYS 状态。禁止任何工程修改、文件修改、调用旧版本服务、Computer Use、shell和子Agent。没有工具或授权不足就如实失败，不用其他路径代替。本次测试通过 WorkBuddy 安装包内置的命令行Agent执行，不冒称桌面GUI对话。

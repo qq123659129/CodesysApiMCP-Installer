@@ -1,0 +1,86 @@
+[
+  {
+    "at": "2026-10-05T01:04:43.367Z",
+    "callId": "call_IXvyhlM98ndOkrtpoA7ZrP8J",
+    "kind": "coordinate_geometry_unavailable",
+    "matchedText": "coordinate input geometry is unavailable",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T01:09:55.155Z",
+    "callId": "call_zFTaqAO21FhlU8quDfwO70QY",
+    "kind": "screenshot_timeout",
+    "matchedText": "FrameArrived timed out",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T01:12:17.802Z",
+    "callId": "call_ygbS1XVNGZevvytlgb5FTwvY",
+    "kind": "uia_input_failure",
+    "matchedText": "0x80004005",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T01:33:40.115Z",
+    "callId": "call_aQZ3kKe8RDDhLmcOzdFppdVY",
+    "kind": "screenshot_timeout",
+    "matchedText": "FrameArrived timed out",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T01:33:40.115Z",
+    "callId": "call_aQZ3kKe8RDDhLmcOzdFppdVY",
+    "kind": "coordinate_geometry_unavailable",
+    "matchedText": "coordinate input geometry is unavailable",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T01:33:40.115Z",
+    "callId": "call_aQZ3kKe8RDDhLmcOzdFppdVY",
+    "kind": "uia_input_failure",
+    "matchedText": "0x80004005",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T01:44:22.276Z",
+    "callId": "call_Q4lGJCsitwr2reltNzpshzZZ",
+    "kind": "mcp_connection_closed",
+    "matchedText": "Connection closed",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T01:59:25.846Z",
+    "callId": "call_orL0Cep4rcX9nf0z2wT2R0Xl",
+    "kind": "license_default_month_active",
+    "matchedText": "DEFAULT_MONTH_ACTIVE",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T01:59:42.879Z",
+    "callId": "call_KNah9tuiCJjx5PZyN716sFcC",
+    "kind": "license_default_month_active",
+    "matchedText": "DEFAULT_MONTH_ACTIVE",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T02:00:01.376Z",
+    "callId": "call_QRrLNoK2SnVyOvr8GMFqYPKq",
+    "kind": "license_default_month_active",
+    "matchedText": "DEFAULT_MONTH_ACTIVE",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T02:00:38.417Z",
+    "callId": "call_36JbUdCKihFP5eEPepltUfw8",
+    "kind": "license_default_month_active",
+    "matchedText": "DEFAULT_MONTH_ACTIVE",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  },
+  {
+    "at": "2026-10-05T02:13:43.776Z",
+    "callId": "call_wt0QLuVp0PldyOvitoiw5aw3",
+    "kind": "license_default_month_active",
+    "matchedText": "DEFAULT_MONTH_ACTIVE",
+    "scope": "调用输出中出现；不是对根因的独立证明"
+  }
+]

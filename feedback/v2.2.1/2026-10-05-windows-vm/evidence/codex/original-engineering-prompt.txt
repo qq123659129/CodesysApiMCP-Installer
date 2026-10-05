@@ -1,0 +1,8 @@
+使用当前已配置的 codesys-v22 MCP，在已连接的 CODESYS SP19 Patch 5 内创建并保存独立测试工程：D:\CodesysApiMCP-V2\V2.2.1\projects\codex\TemperaturePID_Codex.project。
+这是用户明确授权的新建工程、编辑、编译和保存任务。所有本次生成的文件必须位于 D:\CodesysApiMCP-V2\V2.2.1 下。不要调用其他 Agent 或创建子任务。
+先读取 D:\CodesysApiMCP-V2\V2.2.1\installed\resources\skills\codesys-v2-2-builder\SKILL.md 和 trace-reference.md。只用 codesys-v22 的公开 MCP 工具操作 CODESYS；禁止 Computer Use、GUI 操作、直接运行 Python/内部脚本、直接调用 Broker 代替 MCP、手工生成/导入工程文件。可用 shell 只读本安装的说明和官方库文档，并将结果报告写入指定目录。
+步骤：从 codesys_status 获取当前上下文和有效能力；按已连接 IDE 精确模板，通过 codesys_project_file 创建全新上述工程。新建后重新查询结构、读回完整对象及新 context/readRef。查询本机官方 Util 库精确身份和 PID 接口，不凭空猜接口或库版本；优先使用适合固定10ms周期的官方 PID_FIXEDCYCLE（CYCLE=0.01秒），若该接口不可用则根据查到的官方接口选择等效正确的实现，不自行重写 PID 算法。
+创建温度控制模块 FB_TemperatureControl 和调用测试程序 PRG_Temperature_PID。模块输入目标温度和反馈温度，输出 rOutput_pct，限制0到100%，含使能/复位及故障时安全输出。程序包括 rTarget_C、rFeedback_C、rOutput_pct 三个清晰变量，可提供明确标注为测试模拟的一阶温度对象以便以后运行观测，不能映射实体I/O。使用中文说明关键参数和10ms周期。将循环任务设为10ms并明确调用该测试程序；如模板有原程序可替换调用，避免重复 PID 调用。
+通过同一 MCP 创建温控 Trace，采样任务绑定10ms任务，包含 PRG_Temperature_PID.rTarget_C、PRG_Temperature_PID.rFeedback_C、PRG_Temperature_PID.rOutput_pct，必须有可见曲线关联：两条温度同图，输出百分比单独一图，输出纵轴0到100。严格按工具字段及 trace-reference.md 完整配置，创建后如需修改须先读回真实默认值。不要用界面补图，不启动在线运行或PLC下载（当前runtime能力延期）。
+实际编辑批次编译并保存。若编译失败只按明确诊断修复。工具返回QUEUED/RUNNING时查询原requestId；UNKNOWN只查询原请求，不重放。出现阻断如实报告，不绕过，不把代码文本或errorCount=0单独算通过。最终读回库、任务10ms及调用、POU代码、Trace三变量和显示关联，核对保存路径与可读的完整编译诊断（稳定已完成、错误警告数量与信息）。不要无变化重复编译。
+将简明中文验收报告保存到 D:\CodesysApiMCP-V2\V2.2.1\evidence\codex-engineering-result.md，列出真实调用、工程路径、库身份/功能块、周期、Trace读回、编译保存结果和未测项。明确这是官方Codex CLI实际Agent通过MCP创建测试，不冒称当前桌面对话热加载或在线曲线已经运行。无法完成的部分明确失败原因。

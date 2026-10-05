@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "templates": [
+    {
+      "templateId": "minimal-sp18-patch6",
+      "file": "sp18-patch6/MinimalTask.project",
+      "sha256": "ee58a3b3cddbfa9df599ce24227053454ff067d2cf9bb7c9b6ecd9ff7ea793ef",
+      "ideVersion": "3.5.18.60",
+      "profileName": "CODESYS V3.5 SP18 Patch 6",
+      "compilerVersion": "3.5.18.50",
+      "deviceRequirements": [
+        {
+          "name": "CODESYS Control Win V3",
+          "version": "3.5.19.60"
+        }
+      ]
+    },
+    {
+      "templateId": "minimal-sp19-patch5",
+      "file": "sp19-patch5/MinimalTask.project",
+      "sha256": "bef7597cf73de4216ff01d8bc2dc832331de00932d505a109ce5a0ac4cd0c207",
+      "ideVersion": "3.5.19.50",
+      "profileName": "CODESYS V3.5 SP19 Patch 5",
+      "compilerVersion": "3.5.19.50",
+      "deviceRequirements": [
+        {
+          "name": "CODESYS Control Win V3",
+          "version": "3.5.19.60"
+        }
+      ]
+    },
+    {
+      "templateId": "minimal-sp19-patch6",
+      "file": "sp19-patch6/MinimalTask.project",
+      "sha256": "4ddcb6ea25c61b3af05a3907da48832aa60cfd39e13e6524d3b0cc804222ccbc",
+      "ideVersion": "3.5.19.60",
+      "profileName": "CODESYS V3.5 SP19 Patch 6",
+      "compilerVersion": "3.5.19.60",
+      "deviceRequirements": [
+        {
+          "name": "CODESYS Control Win V3 x64",
+          "version": "3.5.19.50"
+        }
+      ]
+    }
+  ]
+}

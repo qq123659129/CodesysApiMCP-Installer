@@ -1,0 +1,8 @@
+{
+  "templateRequired": "CODESYS Control Win V3 3.5.19.60",
+  "deviceDirectories": [
+    "C:\\ProgramData\\CODESYS\\Devices\\4096\\0000 0001\\3.5.19.50",
+    "C:\\ProgramData\\CODESYS\\Devices\\4096\\0000 0002\\3.5.19.50"
+  ],
+  "observedAt": "2026-10-05T09:25:11.7049057+08:00"
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "client": "codex",
+    "configPath": "C:/Users/<USER>\\.codex\\config.toml",
+    "otherSettingsPreserved": true,
+    "otherChangedPaths": [],
+    "clientAddedEmptyDisabledList": false,
+    "correctCommand": true,
+    "correctArgs": true,
+    "correctDataHome": true,
+    "backup": "D:\\CodesysApiMCP-V2\\V2.2.1\\backups\\codex-config.toml.backup-1791162404784-c8cc9cec-c70a-4d2d-92b8-8870ad300538"
+  },
+  {
+    "client": "workbuddy",
+    "configPath": "C:/Users/<USER>\\.workbuddy\\mcp.json",
+    "otherSettingsPreserved": true,
+    "otherChangedPaths": [],
+    "clientAddedEmptyDisabledList": true,
+    "correctCommand": true,
+    "correctArgs": true,
+    "correctDataHome": true,
+    "backup": "D:\\CodesysApiMCP-V2\\V2.2.1\\backups\\workbuddy-mcp.json.backup-1791162406026-a4d55fb6-ea94-4418-a052-b1a3d6773afe"
+  }
+]

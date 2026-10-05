@@ -1,0 +1,33 @@
+CODESYS 2.2.1 温控测试结果修订
+日期：2026-10-05
+
+一、责任结论
+检查遗漏由我负责。安装包明确要求设备描述、编译器和库在目标环境中可用；我只确认了软件版本、对应模板及Util库，没有先查出模板需要的设备版本在本机缺失。
+本次已正确调用MCP集中模板功能，选择SP19 Patch 5模板。开发软件与设备版本数字不同不等于模板错误；已确认的是本机缺少Control Win V3 3.5.19.60。
+MCP也有实际限制：模板可用检查未自动验证本机设备依赖；编译后诊断读取异常，原请求结果不确定，后续工程队列停住。这些不能用修改PID代码解决。
+
+二、官方PID调用位置
+原提交实际使用官方Util 3.5.19.0库中的固定周期PID功能块：PID_FIXCYCLE。
+完整代码：D:\CodesysApiMCP-V2\V2.2.1\projects\codex\unverified-source\FB_TemperatureControl.st
+实例声明：fbPID : Util.PID_FIXCYCLE;
+实际执行：fbPID(...)，其中CYCLE := rCycle_s，rCycle_s为0.01秒。
+目标输入SET_POINT来自目标温度，反馈输入ACTUAL来自反馈温度，Y_MIN为0、Y_MAX为100，输出从fbPID.Y取得。
+调用关系：10ms任务 → PRG_Temperature_PID → fbTemperature → FB_TemperatureControl中的fbPID。
+主程序位置：D:\CodesysApiMCP-V2\V2.2.1\projects\codex\unverified-source\PRG_Temperature_PID.st
+若按精确类型名称区分，原代码使用PID_FIXCYCLE，而不是Util.PID。两者均为官方Util库的PID功能块；固定周期版本符合本次10ms要求。
+官方接口：https://content.helpme-codesys.com/en/libs/Util/3.5.19.0/Controller/PID_FIXCYCLE.html
+
+三、已完成的修订
+1. 更正安装记录和详细报告中的责任说明，不再把环境核对遗漏归为MCP没有要求。
+2. 更正把停止读回归因于“用户要求”的表述；该执行限制是我编写的。
+3. 在两份代码留存稿中标明官方PID声明、调用位置和调用关系，只补充注释，算法保持与原提交一致。
+4. 通过公开MCP补做状态查询和批量只读请求。当前工程仍有未保存修改；只读请求因队列受阻未执行，已取消本轮排队请求，没有重放原修改。
+5. 保留原始调用记录和原件备份，未通过改文件伪造成功的工程。
+
+四、仍未完成
+本次修订不是编译修复或成功交付。原温控修改未完成最终读回、编译和保存，磁盘.project文件不能当作已保存的温控程序；WorkBuddy尚无第二份工程，运行曲线未验证。
+继续工程测试需要先解决设备依赖和诊断读取异常。当前公开MCP没有设备安装/替换能力；本轮无法仅靠修正执行步骤完成这些阻断项。
+
+详细报告：D:\CodesysApiMCP-V2\V2.2.1\evidence\codex-engineering-result.md
+修订验证：D:\CodesysApiMCP-V2\V2.2.1\evidence\revision-20261005\revision-verification.json
+原件备份：D:\CodesysApiMCP-V2\V2.2.1\backups\review-20261005\

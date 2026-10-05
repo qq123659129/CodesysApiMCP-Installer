@@ -1,0 +1,23 @@
+{
+  "status": "INSTALLED",
+  "target": "C:/Users/<USER>\\AppData\\Local\\CODESYS\\Script Commands",
+  "configPath": "C:/Users/<USER>\\AppData\\Local\\CODESYS\\Script Commands\\config.json",
+  "command": {
+    "Name": "CODESYS API MCP V2.2 - Start Watcher",
+    "Desc": "Start the V2.2 Watcher for the configured MCP Manager home.",
+    "Icon": "codesys-api-mcp-v22-watcher.ico",
+    "Path": "codesys-api-mcp-v22-start-watcher.py"
+  },
+  "home": "D:\\CodesysApiMCP-V2\\V2.2.1\\data",
+  "watcher": "D:\\CodesysApiMCP-V2\\V2.2.1\\installed\\watcher\\codesys_api_mcp_watcher.py",
+  "totalCommands": 1,
+  "uiPlacement": "MANUAL_TOOLS_CUSTOMIZE",
+  "reload": "NEXT_IDE_START",
+  "backupPath": null,
+  "backupFiles": [],
+  "previousBinding": null,
+  "currentBinding": {
+    "home": "D:\\CodesysApiMCP-V2\\V2.2.1\\data",
+    "watcher": "D:\\CodesysApiMCP-V2\\V2.2.1\\installed\\watcher\\codesys_api_mcp_watcher.py"
+  }
+}

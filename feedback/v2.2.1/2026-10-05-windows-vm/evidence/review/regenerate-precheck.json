@@ -1,0 +1,21 @@
+{
+  "observedAt": "2026-10-05T09:45:21.9191399+08:00",
+  "regenerationCompleted": false,
+  "newEngineeringMutationSubmitted": false,
+  "requiredDeviceVersion": "3.5.19.60",
+  "installedDeviceVersion": "3.5.19.50",
+  "originalRequestId": "codex-temp-build-01",
+  "originalRequestObservationError": "MCP error -32000: Connection closed",
+  "currentProcesses": [
+    {
+      "Name": "BrokerHost.exe",
+      "ProcessId": 19308,
+      "ExecutablePath": "D:\\CodesysApiMCP-V2\\V2.2.1\\installed\\desktop\\BrokerHost.exe"
+    },
+    {
+      "Name": "Manager.exe",
+      "ProcessId": 9436,
+      "ExecutablePath": "D:\\CodesysApiMCP-V2\\V2.2.1\\installed\\desktop\\Manager.exe"
+    }
+  ]
+}

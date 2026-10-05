@@ -1,0 +1,17 @@
+重新生成温控测试程序：未完成
+日期：2026-10-05
+
+重新检查了当前公开MCP状态、随包模板要求及本机设备目录；未提交新的工程修改。
+
+1. 本机CODESYS为SP19 Patch 5，版本3.5.19.50。随包对应模板minimal-sp19-patch5要求Control Win V3 3.5.19.60；本机普通版及x64设备目录均只有3.5.19.50。软件版本与模板匹配，但设备依赖仍不满足。
+2. 随包SP18 Patch 6模板也要求3.5.19.60设备。SP19 Patch 6模板使用3.5.19.50设备，但要求另一开发软件版本，不能用它冒充SP19 Patch 5模板。
+3. 本轮codesys_status确认CODESYS连接已断开，连接脚本已退出；最新工程状态为空工程，旧编辑请求codex-temp-build-01仍未取得明确结果。
+4. 本轮通过codesys_request查询原编辑请求时，公开MCP连接返回：MCP error -32000: Connection closed。
+5. 当前公开MCP没有安装或替换设备、制作或登记新模板的功能。没有用界面或内部脚本绕过MCP，没有修改模板索引，没有清除旧请求记录。
+
+本轮没有成功新建工程，没有新的编译、保存或运行验证，不能将旧代码留存稿当作重新生成的结果。
+继续需要：可用于本机的模板及设备依赖组合，以及恢复正常的MCP连接和原请求状态。
+已保留原代码中的官方Util.PID_FIXCYCLE调用、10ms设定和三变量曲线提交证据，未更改其未验收状态。
+
+本轮证据：D:\CodesysApiMCP-V2\V2.2.1\evidence\regenerate-20261005\
+既有代码留存：D:\CodesysApiMCP-V2\V2.2.1\projects\codex\unverified-source\

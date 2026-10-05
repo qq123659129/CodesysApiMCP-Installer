@@ -1,0 +1,17 @@
+{
+  "status": "INSPECTED",
+  "target": "C:/Users/<USER>\\AppData\\Local\\CODESYS\\Script Commands",
+  "configPath": "C:/Users/<USER>\\AppData\\Local\\CODESYS\\Script Commands\\config.json",
+  "home": "D:\\CodesysApiMCP-V2\\V2.2.1\\data",
+  "watcher": "D:\\CodesysApiMCP-V2\\V2.2.1\\installed\\watcher\\codesys_api_mcp_watcher.py",
+  "installed": false,
+  "bindingChanged": false,
+  "previousBinding": null,
+  "currentBinding": {
+    "home": "D:\\CodesysApiMCP-V2\\V2.2.1\\data",
+    "watcher": "D:\\CodesysApiMCP-V2\\V2.2.1\\installed\\watcher\\codesys_api_mcp_watcher.py"
+  },
+  "repairAvailable": false,
+  "uiPlacement": "MANUAL_TOOLS_CUSTOMIZE",
+  "reload": "NEXT_IDE_START"
+}

@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-05T01:36:35.062Z",
+  "input": {
+    "name": "codesys_request",
+    "arguments": {
+      "action": "status",
+      "requestId": "codex-review-read-20261005-01",
+      "waitMs": 20000
+    }
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"QUEUED\",\"requestId\":\"codex-review-read-20261005-01\",\"queueOrdinal\":8,\"counts\":{\"watcherCommands\":0,\"nativeOperations\":0,\"compile\":0,\"save\":0},\"progress\":{\"state\":\"QUEUED\",\"phase\":\"queued\",\"queuePosition\":1,\"watcherState\":\"IDLE\"},\"nextCall\":{\"tool\":\"codesys_request\",\"arguments\":{\"action\":\"status\",\"requestId\":\"codex-review-read-20261005-01\",\"waitMs\":20000}}}"
+      }
+    ],
+    "structuredContent": {
+      "status": "QUEUED",
+      "requestId": "codex-review-read-20261005-01",
+      "queueOrdinal": 8,
+      "counts": {
+        "watcherCommands": 0,
+        "nativeOperations": 0,
+        "compile": 0,
+        "save": 0
+      },
+      "progress": {
+        "state": "QUEUED",
+        "phase": "queued",
+        "queuePosition": 1,
+        "watcherState": "IDLE"
+      },
+      "nextCall": {
+        "tool": "codesys_request",
+        "arguments": {
+          "action": "status",
+          "requestId": "codex-review-read-20261005-01",
+          "waitMs": 20000
+        }
+      }
+    },
+    "isError": false
+  }
+}

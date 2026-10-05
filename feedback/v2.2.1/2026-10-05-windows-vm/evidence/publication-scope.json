@@ -1,0 +1,202 @@
+{
+  "createdAt": "2026-10-05T03:16:42.096Z",
+  "evidenceDate": "2026-10-05",
+  "conversationCutoff": "2026-10-05T03:02:15.830Z",
+  "originalInitialRequestPresent": true,
+  "userMessages": 15,
+  "assistantMessages": 36,
+  "toolCalls": 104,
+  "sourceScope": "当前聊天；公开对话全文及工具时间索引；工程MCP调用原始记录经脱敏提供；非完整会话底层日志",
+  "excluded": [
+    "授权记录和授权码",
+    "机器硬件标识和私钥",
+    "完整Agent配置及备份",
+    "无关MCP服务详情",
+    "系统和开发者指令",
+    "内部推理和隐藏上下文",
+    "核心源码整包",
+    "安装包二进制"
+  ],
+  "copied": [
+    {
+      "source": "evidence/codex-engineering-events.jsonl",
+      "published": "evidence/codex/engineering-events.sanitized.jsonl",
+      "bytes": 897926,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/codex-status-events.jsonl",
+      "published": "evidence/codex/status-events.sanitized.jsonl",
+      "bytes": 4422,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/codex-engineering-prompt.txt",
+      "published": "evidence/codex/original-engineering-prompt.txt",
+      "bytes": 3214,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/codex-engineering-result.md",
+      "published": "evidence/codex/revised-engineering-report.md",
+      "bytes": 15496,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/codex-submitted-batch-UNVERIFIED.json",
+      "published": "evidence/codex/submitted-batch-UNVERIFIED.json",
+      "bytes": 9673,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/codex-final-original-request.json",
+      "published": "evidence/codex/final-original-request.json",
+      "bytes": 355272,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/configuration-verification.json",
+      "published": "evidence/configuration-verification.json",
+      "bytes": 830,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/device-dependency-observation.json",
+      "published": "evidence/device-dependency-observation.json",
+      "bytes": 281,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/download-verification.json",
+      "published": "evidence/package/download-verification.json",
+      "bytes": 253,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/manager-connection-state.json",
+      "published": "evidence/manager-connection-state.json",
+      "bytes": 3930,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/codesys-installations.json",
+      "published": "evidence/codesys-installations.json",
+      "bytes": 2270,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/codesys-launch.json",
+      "published": "evidence/codesys-launch.json",
+      "bytes": 396,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/shortcut-inspection.json",
+      "published": "evidence/shortcut-inspection.json",
+      "bytes": 680,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/shortcut-installation.json",
+      "published": "evidence/shortcut-installation.json",
+      "bytes": 913,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/workbuddy-cli-mcp-config.txt",
+      "published": "evidence/workbuddy/mcp-connection.txt",
+      "bytes": 337,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/workbuddy-cli-status-prompt.txt",
+      "published": "evidence/workbuddy/status-prompt.txt",
+      "bytes": 417,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/regenerate-20261005/precheck.json",
+      "published": "evidence/review/regenerate-precheck.json",
+      "bytes": 682,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/regenerate-20261005/mcp-status.json",
+      "published": "evidence/review/regenerate-status.json",
+      "bytes": 5889,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/revision-20261005/revision-verification.json",
+      "published": "evidence/review/revision-verification.json",
+      "bytes": 1530,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/revision-20261005/public-tools.json",
+      "published": "evidence/public-tools.json",
+      "bytes": 90958,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "installed/release.json",
+      "published": "evidence/package/release.json",
+      "bytes": 749,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "installed/resources/templates/index.json",
+      "published": "evidence/package/template-index.json",
+      "bytes": 1385,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "projects/codex/unverified-source/FB_TemperatureControl.st",
+      "published": "code/FB_TemperatureControl-UNVERIFIED.st",
+      "bytes": 3566,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "projects/codex/unverified-source/PRG_Temperature_PID.st",
+      "published": "code/PRG_Temperature_PID-UNVERIFIED.st",
+      "bytes": 2384,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "安装与验证记录.txt",
+      "published": "evidence/installation-test-record.txt",
+      "bytes": 6848,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "结果修订说明.txt",
+      "published": "evidence/revision-explanation.txt",
+      "bytes": 2954,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "重新生成测试程序-阻断记录.txt",
+      "published": "evidence/regeneration-blockers.txt",
+      "bytes": 1600,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/revision-20261005/codesys_object_read-2026-10-05T01-35-37-467Z.json",
+      "published": "evidence/review/codesys_object_read-2026-10-05T01-35-37-467Z.json",
+      "bytes": 1904,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/revision-20261005/codesys_request-2026-10-05T01-36-13-860Z.json",
+      "published": "evidence/review/codesys_request-2026-10-05T01-36-13-860Z.json",
+      "bytes": 1374,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    },
+    {
+      "source": "evidence/revision-20261005/codesys_request-2026-10-05T01-37-12-105Z.json",
+      "published": "evidence/review/codesys_request-2026-10-05T01-37-12-105Z.json",
+      "bytes": 1075,
+      "transformation": "用户名和敏感字段脱敏；保留业务值、失败状态和原请求编号"
+    }
+  ]
+}

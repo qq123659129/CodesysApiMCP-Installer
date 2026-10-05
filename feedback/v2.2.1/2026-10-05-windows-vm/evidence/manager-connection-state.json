@@ -1,0 +1,105 @@
+{
+  "runtime": {
+    "status": "PASS",
+    "context": {
+      "watcherInstanceId": "77ea9cb4949f4fdcaf87e08a0fb420b0",
+      "projectEpoch": 1
+    },
+    "data": {
+      "connection": "CONNECTED",
+      "heartbeatAgeMs": 717.9479999999749,
+      "heartbeat": {
+        "applicationPath": null,
+        "commandId": null,
+        "controlWinCredentials": {
+          "configured": false,
+          "loaded": true,
+          "sourceId": "",
+          "status": "LOADED"
+        },
+        "heartbeatAt": "2026-10-05T01:11:58.602Z",
+        "ideIdentity": {
+          "executablePath": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS\\Common\\CODESYS.exe",
+          "ideVersion": "3.5.19.50",
+          "processId": 18816,
+          "profileName": "CODESYS V3.5 SP19 Patch 5",
+          "profileSource": "commandLine"
+        },
+        "processId": 18816,
+        "projectDirty": null,
+        "projectEpoch": 1,
+        "projectFilePath": null,
+        "projectName": null,
+        "projectObservedAt": "2026-10-05T01:11:58.095Z",
+        "protocolVersion": 1,
+        "sequence": 21,
+        "watcherInstanceId": "77ea9cb4949f4fdcaf87e08a0fb420b0",
+        "watcherState": "IDLE"
+      },
+      "context": {
+        "watcherInstanceId": "77ea9cb4949f4fdcaf87e08a0fb420b0",
+        "projectEpoch": 1
+      },
+      "contextSource": "heartbeat",
+      "queueDepth": 0,
+      "activeRequestId": null,
+      "unknownRequestIds": [],
+      "codingStandards": {
+        "revision": "st-portable/1",
+        "settings": {
+          "enabled": false,
+          "naming": false,
+          "comments": false,
+          "formatting": false,
+          "personalVersion": false
+        },
+        "rules": {
+          "naming": "新增对象使用 IEC 标识符，新建 POU 使用 FB_/PRG_/F_ 前缀；基础类型变量使用类型前缀。保留已有对象和官方接口名称。",
+          "comments": "使用有实际含义的中文注释；接口、跨周期状态声明及控制、复位、故障、输出等关键节点需同行或紧邻前行说明。字符串中的注释符无效。",
+          "formatting": "使用空格缩进，无行尾空白，每行最多 120 个 Unicode 字符。",
+          "personalVersion": "版本标记位于真实注释中；缺失仅警告，不自动修改版本。",
+          "scope": "创建和替换检查提交的完整代码节；patch 仅阻断所改行及相邻关联节点，未改历史问题只提示。检查无法证明注释语义与业务完全一致。"
+        },
+        "enforcedBy": "MCP",
+        "skillRequired": false
+      },
+      "capabilities": {
+        "codeRead": "available",
+        "codeApply": "available",
+        "compile": "available",
+        "save": "available",
+        "libraryQuery": "available",
+        "plcTask": "available-scoped",
+        "libraryModification": "available-scoped",
+        "plcTrace": "available-scoped",
+        "runtime": "deferred"
+      }
+    },
+    "counts": {
+      "watcherCommands": 0,
+      "nativeOperations": 0,
+      "compile": 0,
+      "save": 0
+    }
+  },
+  "watcherPath": "D:\\CodesysApiMCP-V2\\V2.2.1\\installed\\watcher\\codesys_api_mcp_watcher.py",
+  "version": "2.2.1",
+  "launch": {
+    "startedAt": "2026-10-05T01:10:18.718Z",
+    "processId": 18816,
+    "executablePath": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS\\Common\\CODESYS.exe",
+    "profileName": "CODESYS V3.5 SP19 Patch 5",
+    "additionalFolder": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS",
+    "status": "CONNECTED",
+    "message": "所启动的 CODESYS 已连接 MCP。"
+  },
+  "projectTemplate": {
+    "status": "READY",
+    "id": "minimal-sp19-patch5",
+    "ideVersion": "3.5.19.50",
+    "profileName": "CODESYS V3.5 SP19 Patch 5",
+    "compilerVersion": "3.5.19.50",
+    "sha256": "bef7597cf73de4216ff01d8bc2dc832331de00932d505a109ce5a0ac4cd0c207",
+    "message": "新建工程使用 CODESYS V3.5 SP19 Patch 5 对应模板。"
+  }
+}

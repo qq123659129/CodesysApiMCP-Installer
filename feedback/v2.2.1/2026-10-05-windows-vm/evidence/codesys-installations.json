@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "installations": [
+    {
+      "id": "d787b6601e5f9b407806f4c3484080eb",
+      "executablePath": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS\\Common\\CODESYS.exe",
+      "additionalFolder": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS",
+      "profileName": "CODESYS V3.5 SP19 Patch 5",
+      "profilePath": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS\\Profiles\\CODESYS V3.5 SP19 Patch 5.profile.xml",
+      "ideVersion": "3.5.19.50",
+      "status": "AVAILABLE",
+      "sources": [
+        "registry",
+        "directory"
+      ],
+      "scripting": {
+        "status": "READY",
+        "installedVersion": "4.2.0.0",
+        "apiVersion": "4.2.0.0",
+        "requiredVersion": "4.2.0.0",
+        "pluginPath": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS\\PlugIns\\dc937c18-e9f0-434d-85b7-1b8f499e378a\\4.2.0.0\\ScriptEngine.plugin.dll",
+        "message": "脚本组件 4.2.0.0 已满足 MCP 启动要求；连接后再确认实际加载版本。"
+      },
+      "instanceName": "基础实例",
+      "template": {
+        "status": "READY",
+        "id": "minimal-sp19-patch5",
+        "ideVersion": "3.5.19.50",
+        "profileName": "CODESYS V3.5 SP19 Patch 5",
+        "compilerVersion": "3.5.19.50",
+        "sha256": "bef7597cf73de4216ff01d8bc2dc832331de00932d505a109ce5a0ac4cd0c207",
+        "message": "新建工程使用 CODESYS V3.5 SP19 Patch 5 对应模板。"
+      }
+    },
+    {
+      "id": "f7443ccafc65bb18d90d1a813a2d6f0f",
+      "executablePath": "C:\\Program Files\\CODESYS 3.5.19.60\\CODESYS\\Common\\CODESYS.exe",
+      "additionalFolder": "C:\\Program Files\\CODESYS 3.5.19.60\\CODESYS",
+      "profileName": null,
+      "profilePath": null,
+      "ideVersion": null,
+      "status": "UNAVAILABLE",
+      "sources": [
+        "configured"
+      ],
+      "reason": "ENOENT: no such file or directory, realpath 'C:\\Program Files\\CODESYS 3.5.19.60\\CODESYS\\Common\\CODESYS.exe'"
+    }
+  ],
+  "selectedId": null,
+  "selected": {
+    "executablePath": "C:\\Program Files\\CODESYS 3.5.19.60\\CODESYS\\Common\\CODESYS.exe",
+    "additionalFolder": "C:\\Program Files\\CODESYS 3.5.19.60\\CODESYS",
+    "profileName": "CODESYS V3.5 SP19 Patch 6"
+  },
+  "observedAt": "2026-10-05T01:08:54.335Z",
+  "warnings": []
+}

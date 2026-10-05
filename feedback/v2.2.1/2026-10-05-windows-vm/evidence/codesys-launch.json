@@ -1,0 +1,9 @@
+{
+  "status": "STARTING",
+  "startedAt": "2026-10-05T01:10:18.718Z",
+  "processId": 18816,
+  "executablePath": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS\\Common\\CODESYS.exe",
+  "profileName": "CODESYS V3.5 SP19 Patch 5",
+  "additionalFolder": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS",
+  "watcherPath": "D:\\CodesysApiMCP-V2\\V2.2.1\\installed\\watcher\\codesys_api_mcp_watcher.py"
+}

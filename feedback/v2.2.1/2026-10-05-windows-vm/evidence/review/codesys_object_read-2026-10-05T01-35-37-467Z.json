@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-05T01:35:58.960Z",
+  "input": {
+    "name": "codesys_object_read",
+    "arguments": {
+      "requestId": "codex-review-read-20261005-01",
+      "expectedContext": {
+        "watcherInstanceId": "77ea9cb4949f4fdcaf87e08a0fb420b0",
+        "projectEpoch": 2,
+        "applicationPath": "Device/Plc Logic/Application"
+      },
+      "objectPaths": [
+        "Device/Plc Logic/Application/Library Manager",
+        "Device/Plc Logic/Application/FB_TemperatureControl",
+        "Device/Plc Logic/Application/PRG_Temperature_PID",
+        "Device/Plc Logic/Application/Task Configuration/MainTask",
+        "Device/Plc Logic/Application/Trace_Temperature_PID"
+      ],
+      "pageBytes": 131072,
+      "waitMs": 20000
+    }
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"status\":\"QUEUED\",\"requestId\":\"codex-review-read-20261005-01\",\"queueOrdinal\":8,\"counts\":{\"watcherCommands\":0,\"nativeOperations\":0,\"compile\":0,\"save\":0},\"progress\":{\"state\":\"QUEUED\",\"phase\":\"queued\",\"queuePosition\":1,\"watcherState\":\"IDLE\"},\"nextCall\":{\"tool\":\"codesys_request\",\"arguments\":{\"action\":\"status\",\"requestId\":\"codex-review-read-20261005-01\",\"waitMs\":20000}}}"
+      }
+    ],
+    "structuredContent": {
+      "status": "QUEUED",
+      "requestId": "codex-review-read-20261005-01",
+      "queueOrdinal": 8,
+      "counts": {
+        "watcherCommands": 0,
+        "nativeOperations": 0,
+        "compile": 0,
+        "save": 0
+      },
+      "progress": {
+        "state": "QUEUED",
+        "phase": "queued",
+        "queuePosition": 1,
+        "watcherState": "IDLE"
+      },
+      "nextCall": {
+        "tool": "codesys_request",
+        "arguments": {
+          "action": "status",
+          "requestId": "codex-review-read-20261005-01",
+          "waitMs": 20000
+        }
+      }
+    },
+    "isError": false
+  }
+}
