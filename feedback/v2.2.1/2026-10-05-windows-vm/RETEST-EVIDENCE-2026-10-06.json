@@ -1,0 +1,933 @@
+{
+  "date": "2026-10-06",
+  "environment": {
+    "os": "Windows 10 x64 / VMware",
+    "codesys": "SP19 Patch 5 (3.5.19.50)",
+    "mcp": "2.2.1",
+    "bundleId": "v221-customer-repair-bundle-001",
+    "sourceCommit": "b3d14bad985768735fafc65a18b506bf7ac9837f",
+    "release": "v2.2.1",
+    "assetBytes": 154074814,
+    "assetSha256": "62538033e2af08e34f3fcd8f7d1cb73b63f0db727ee69f6a71e3a5e313de5308",
+    "githubDigestMatches": true
+  },
+  "install": {
+    "status": "PASS",
+    "files": 1997,
+    "oldUninstall": "PASS",
+    "oldFilesRemoved": 1996,
+    "formalLicenseReused": true
+  },
+  "license": {
+    "total": 17,
+    "passed": 17,
+    "cases": [
+      {
+        "case": "fresh-empty",
+        "pass": true,
+        "code": "LICENSE_REQUIRED"
+      },
+      {
+        "case": "previous-formal",
+        "pass": true,
+        "code": "LICENSE_VALID"
+      },
+      {
+        "case": "malformed-code",
+        "pass": true,
+        "code": "LICENSE_FORMAT_INVALID"
+      },
+      {
+        "case": "wrong-machine",
+        "pass": true,
+        "code": "LICENSE_HARDWARE_MISMATCH"
+      },
+      {
+        "case": "tampered-signature",
+        "pass": true,
+        "code": "LICENSE_SIGNATURE_INVALID"
+      },
+      {
+        "case": "expired",
+        "pass": true,
+        "code": "LICENSE_EXPIRED"
+      },
+      {
+        "case": "clock-rollback",
+        "pass": true,
+        "code": "LICENSE_CLOCK_ROLLBACK"
+      },
+      {
+        "case": "missing-clock",
+        "pass": true,
+        "code": "LICENSE_TIME_STATE_MISSING"
+      },
+      {
+        "case": "old-trial-record",
+        "pass": true,
+        "code": "LICENSE_REQUIRED"
+      },
+      {
+        "case": "another-empty-home",
+        "pass": true,
+        "code": "LICENSE_REQUIRED"
+      },
+      {
+        "case": "codesys_project_query",
+        "pass": true,
+        "code": "LICENSE_REQUIRED",
+        "counts": {
+          "nativeOperations": 0,
+          "compile": 0,
+          "save": 0
+        }
+      },
+      {
+        "case": "codesys_object_read",
+        "pass": true,
+        "code": "LICENSE_REQUIRED",
+        "counts": {
+          "nativeOperations": 0,
+          "compile": 0,
+          "save": 0
+        }
+      },
+      {
+        "case": "codesys_project_apply",
+        "pass": true,
+        "code": "LICENSE_REQUIRED",
+        "counts": {
+          "nativeOperations": 0,
+          "compile": 0,
+          "save": 0
+        }
+      },
+      {
+        "case": "codesys_project_compile",
+        "pass": true,
+        "code": "LICENSE_REQUIRED",
+        "counts": {
+          "nativeOperations": 0,
+          "compile": 0,
+          "save": 0
+        }
+      },
+      {
+        "case": "codesys_project_file",
+        "pass": true,
+        "code": "LICENSE_REQUIRED",
+        "counts": {
+          "nativeOperations": 0,
+          "compile": 0,
+          "save": 0
+        }
+      },
+      {
+        "case": "codesys_library_query",
+        "pass": true,
+        "code": "LICENSE_REQUIRED",
+        "counts": {
+          "nativeOperations": 0,
+          "compile": 0,
+          "save": 0
+        }
+      },
+      {
+        "case": "unauthorized-status-readable",
+        "pass": true,
+        "code": "PASS",
+        "counts": {
+          "nativeOperations": 0,
+          "compile": 0,
+          "save": 0
+        }
+      }
+    ]
+  },
+  "manual": {
+    "allSixSectionsPresent": true,
+    "sectionCount": 6,
+    "brokenInternalLinks": 0,
+    "embeddedPictures": 14,
+    "imageTags": 3,
+    "anchors": 12
+  },
+  "engineering": {
+    "twoStage": {
+      "changes": [
+        {
+          "index": 0,
+          "objectPath": "Device/Plc Logic/Application/Library Manager",
+          "status": "APPLIED"
+        },
+        {
+          "index": 1,
+          "objectPath": "Device/Plc Logic/Application/FB_TemperaturePID",
+          "status": "APPLIED"
+        },
+        {
+          "index": 2,
+          "objectPath": "Device/Plc Logic/Application/PRG_TemperatureTest",
+          "status": "APPLIED"
+        },
+        {
+          "index": 3,
+          "objectPath": "Device/Plc Logic/Application/PLC_PRG",
+          "status": "APPLIED"
+        },
+        {
+          "index": 4,
+          "objectPath": "Device/Plc Logic/Application/Task Configuration/MainTask",
+          "status": "APPLIED"
+        },
+        {
+          "index": 5,
+          "objectPath": "Device/Plc Logic/Application/Trace_TemperaturePID",
+          "status": "APPLIED"
+        }
+      ],
+      "compilation": {
+        "buildCompleted": true,
+        "outcome": "passed"
+      },
+      "context": {
+        "applicationPath": "Device/Plc Logic/Application",
+        "projectEpoch": 2,
+        "watcherInstanceId": "b1f3aec58af244d282566f0d16eaaed6"
+      },
+      "counts": {
+        "compile": 1,
+        "nativeOperations": 40,
+        "save": 1,
+        "watcherCommands": 1
+      },
+      "data": {
+        "changed": true,
+        "projectFilePath": "D:\\CodesysApiMCP-V2\\V2.2.1\\retest-20261006-latest\\projects\\TemperatureTwoStage_20261006.project",
+        "saved": true
+      },
+      "diagnostics": [
+        {
+          "message": "------ 开始编译应用程序 Device.Application -------",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "代码典型化...",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "Size of licensed usercode: 0 bytes",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "Memory usage on device, not used for licensing purposes:",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "完全编译 -- 0错误,0警告",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "其他代码检查...",
+          "nativeCodePrefix": "SA",
+          "severity": "info"
+        },
+        {
+          "message": "其他代码检查完成-0 个错误",
+          "nativeCodePrefix": "SA",
+          "severity": "info"
+        }
+      ],
+      "diagnosticsComplete": true,
+      "requestId": "two-stage-temperature-20261006",
+      "status": "PASS",
+      "timings": {
+        "admissionMs": 21.559999999590218,
+        "queueMs": 0.06780000030994415,
+        "dispatchPreparationMs": 17.90059999981895,
+        "compileMs": 1079,
+        "nativeMs": 34959,
+        "transportMs": 36974.42200000025,
+        "totalMs": 37014.12299999967,
+        "coreMs": 39.63319999910891
+      },
+      "trace": {
+        "clock": "watcher-monotonic",
+        "nativeFinishedMs": 14969178.8934,
+        "nativeStartedMs": 14934219.5997
+      },
+      "queueOrdinal": 17,
+      "timingScope": "current-request"
+    },
+    "initialTemperatureProject": {
+      "changes": [
+        {
+          "index": 0,
+          "objectPath": "Device/Plc Logic/Application/Library Manager",
+          "status": "APPLIED"
+        },
+        {
+          "index": 1,
+          "objectPath": "Device/Plc Logic/Application/FB_TemperaturePID",
+          "status": "APPLIED"
+        },
+        {
+          "index": 2,
+          "objectPath": "Device/Plc Logic/Application/PRG_TemperatureTest",
+          "status": "APPLIED"
+        },
+        {
+          "index": 3,
+          "objectPath": "Device/Plc Logic/Application/PLC_PRG",
+          "status": "APPLIED"
+        },
+        {
+          "index": 4,
+          "objectPath": "Device/Plc Logic/Application/Task Configuration/MainTask",
+          "status": "APPLIED"
+        },
+        {
+          "index": 5,
+          "objectPath": "Device/Plc Logic/Application/TemperatureTrace",
+          "status": "APPLIED"
+        }
+      ],
+      "compilation": {
+        "buildCompleted": true,
+        "outcome": "passed"
+      },
+      "context": {
+        "applicationPath": "Device/Plc Logic/Application",
+        "projectEpoch": 2,
+        "watcherInstanceId": "5cd6ceb180cf4adb9dbd1932265d8e89"
+      },
+      "counts": {
+        "compile": 1,
+        "nativeOperations": 25,
+        "save": 1,
+        "watcherCommands": 1
+      },
+      "data": {
+        "changed": true,
+        "projectFilePath": "D:\\CodesysApiMCP-V2\\V2.2.1\\retest-20261006-latest\\projects\\TemperaturePID_Codex_20261006.project",
+        "saved": true
+      },
+      "diagnostics": [
+        {
+          "message": "------ 开始编译应用程序 Device.Application -------",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "代码典型化...",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "Size of licensed usercode: 0 bytes",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "Memory usage on device, not used for licensing purposes:",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "完全编译 -- 0错误,0警告",
+          "nativeCodePrefix": "C",
+          "severity": "info"
+        },
+        {
+          "message": "其他代码检查...",
+          "nativeCodePrefix": "SA",
+          "severity": "info"
+        },
+        {
+          "message": "其他代码检查完成-0 个错误",
+          "nativeCodePrefix": "SA",
+          "severity": "info"
+        }
+      ],
+      "diagnosticsComplete": true,
+      "requestId": "temp-build-feature-20261006",
+      "status": "PASS",
+      "timings": {
+        "admissionMs": 21.709599999943748,
+        "queueMs": 0.07719999994151294,
+        "dispatchPreparationMs": 11.927499999990687,
+        "compileMs": 1798,
+        "nativeMs": 67957,
+        "transportMs": 69670.30180000002,
+        "totalMs": 69704.28199999989,
+        "coreMs": 33.902999999932945
+      },
+      "trace": {
+        "clock": "watcher-monotonic",
+        "nativeFinishedMs": 12961955.5326,
+        "nativeStartedMs": 12893997.7595
+      },
+      "queueOrdinal": 7,
+      "timingScope": "current-request"
+    },
+    "threeStage": {
+      "project": "projects/TemperatureCascade3_Codex_20261006.project",
+      "templateCreate": {
+        "compilation": {
+          "buildCompleted": true,
+          "outcome": "passed"
+        },
+        "context": {
+          "applicationPath": "Device/Plc Logic/Application",
+          "projectEpoch": 2,
+          "watcherInstanceId": "893701146ba04dc0be6f6b15e0e26cce"
+        },
+        "counts": {
+          "compile": 1,
+          "nativeOperations": 2,
+          "save": 0,
+          "watcherCommands": 1
+        },
+        "data": {
+          "applicationPath": "Device/Plc Logic/Application",
+          "applicationPaths": [
+            "Device/Plc Logic/Application"
+          ],
+          "applicationSelectionRequired": false,
+          "compilerVersion": "3.5.19.50",
+          "created": true,
+          "deviceRequirements": [
+            {
+              "id": "0000 0004",
+              "name": "Device",
+              "type": 4096,
+              "version": "3.5.19.50"
+            }
+          ],
+          "projectFilePath": "D:\\CodesysApiMCP-V2\\V2.2.1\\retest-20261006-latest\\projects\\TemperatureCascade3_Codex_20261006.project",
+          "saved": true,
+          "targetCopied": true,
+          "targetCreated": true,
+          "templateId": "minimal-sp19-patch5",
+          "templateSha256": "beedaad0dd900ce7d1a61160351231324aa086dcc27f238b3e75fc6dc3ece846",
+          "templateValidation": {
+            "compilerVersion": "3.5.19.50",
+            "complete": true,
+            "devices": [
+              {
+                "id": "0000 0004",
+                "name": "Device",
+                "type": 4096,
+                "version": "3.5.19.50"
+              }
+            ],
+            "libraries": {
+              "applicationPath": "Device/Plc Logic/Application",
+              "libraries": [
+                {
+                  "applicationPath": "Device/Plc Logic/Application",
+                  "company": null,
+                  "defaultResolution": "Standard, * (System)",
+                  "displayName": "#Standard",
+                  "effectiveResolution": "Standard, 3.5.18.0 (System)",
+                  "identityComplete": false,
+                  "isPlaceholder": true,
+                  "managerPath": "Device/Plc Logic/Application/Library Manager",
+                  "name": "#Standard",
+                  "namespace": "Standard",
+                  "placeholderName": "Standard",
+                  "resolutionAvailable": true,
+                  "version": null
+                },
+                {
+                  "applicationPath": "Device/Plc Logic/Application",
+                  "company": null,
+                  "defaultResolution": "Breakpoint Logging Functions, * (3S - Smart Software Solutions GmbH)",
+                  "displayName": "#BreakpointLogging",
+                  "effectiveResolution": "Breakpoint Logging Functions, 3.5.17.0 (3S - Smart Software Solutions GmbH)",
+                  "identityComplete": false,
+                  "isPlaceholder": true,
+                  "managerPath": "Device/Plc Logic/Application/Library Manager",
+                  "name": "#BreakpointLogging",
+                  "namespace": "BPLog",
+                  "placeholderName": "BreakpointLogging",
+                  "resolutionAvailable": true,
+                  "version": null
+                },
+                {
+                  "applicationPath": "Device/Plc Logic/Application",
+                  "company": null,
+                  "defaultResolution": "IoStandard, 3.5.17.0 (System)",
+                  "displayName": "#IoStandard",
+                  "effectiveResolution": "IoStandard, 3.5.17.0 (System)",
+                  "identityComplete": false,
+                  "isPlaceholder": true,
+                  "managerPath": "Device/Plc Logic/Application/Library Manager",
+                  "name": "#IoStandard",
+                  "namespace": "IoStandard",
+                  "placeholderName": "IoStandard",
+                  "resolutionAvailable": true,
+                  "version": null
+                },
+                {
+                  "applicationPath": "Device/Plc Logic/Application",
+                  "company": null,
+                  "defaultResolution": "3SLicense, 0.0.0.0 (3S - Smart Software Solutions GmbH)",
+                  "displayName": "#3SLicense",
+                  "effectiveResolution": "3SLicense, 3.5.19.10 (3S - Smart Software Solutions GmbH)",
+                  "identityComplete": false,
+                  "isPlaceholder": true,
+                  "managerPath": "Device/Plc Logic/Application/Library Manager",
+                  "name": "#3SLicense",
+                  "namespace": "_3S_LICENSE",
+                  "placeholderName": "3SLicense",
+                  "resolutionAvailable": true,
+                  "version": null
+                },
+                {
+                  "applicationPath": "Device/Plc Logic/Application",
+                  "company": null,
+                  "defaultResolution": "CAA Device Diagnosis, 3.5.19.10 (CAA Technical Workgroup)",
+                  "displayName": "#CAA Device Diagnosis",
+                  "effectiveResolution": "CAA Device Diagnosis, 3.5.19.10 (CAA Technical Workgroup)",
+                  "identityComplete": false,
+                  "isPlaceholder": true,
+                  "managerPath": "Device/Plc Logic/Application/Library Manager",
+                  "name": "#CAA Device Diagnosis",
+                  "namespace": "DED",
+                  "placeholderName": "CAA Device Diagnosis",
+                  "resolutionAvailable": true,
+                  "version": null
+                }
+              ],
+              "managers": [
+                {
+                  "applicationPath": "Device/Plc Logic/Application",
+                  "objectPath": "Device/Plc Logic/Application/Library Manager",
+                  "referenceCount": 5,
+                  "scope": "application"
+                }
+              ],
+              "scope": "projectAndSelectedApplication"
+            },
+            "reopened": false,
+            "task": {
+              "applicationPath": "Device/Plc Logic/Application",
+              "coreBinding": -2,
+              "interval": "t#20ms",
+              "intervalUnit": "ms",
+              "pous": [
+                {
+                  "comment": "",
+                  "name": "PLC_PRG",
+                  "objectId": "guid:f2152c24-f4bf-4f05-ade5-58375f9bd7f6",
+                  "objectPath": "Device/Plc Logic/Application/PLC_PRG"
+                }
+              ],
+              "priority": 1,
+              "taskType": "cyclic",
+              "type": "plcTask",
+              "unavailableFields": [],
+              "watchdog": {
+                "enabled": false,
+                "sensitivity": "1",
+                "time": "",
+                "timeUnit": "ms"
+              }
+            }
+          }
+        },
+        "diagnostics": [
+          {
+            "message": "------ 开始编译应用程序 Device.Application -------",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "代码典型化...",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "Size of licensed usercode: 0 bytes",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "Memory usage on device, not used for licensing purposes:",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "完全编译 -- 0错误,0警告",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "其他代码检查...",
+            "nativeCodePrefix": "SA",
+            "severity": "info"
+          },
+          {
+            "message": "其他代码检查完成-0 个错误",
+            "nativeCodePrefix": "SA",
+            "severity": "info"
+          }
+        ],
+        "diagnosticsComplete": true,
+        "requestId": "three-stage-create2-20261006",
+        "status": "PASS",
+        "timings": {
+          "admissionMs": 16.30269999988377,
+          "queueMs": 0.013700000010430813,
+          "dispatchPreparationMs": 14.846499999985099,
+          "compileMs": 3298,
+          "nativeMs": 12989,
+          "transportMs": 16357.500500000082,
+          "totalMs": 16389.048499999568,
+          "coreMs": 31.53429999947548
+        },
+        "trace": {
+          "clock": "watcher-monotonic",
+          "nativeFinishedMs": 15693278.5544,
+          "nativeStartedMs": 15680289.106
+        },
+        "queueOrdinal": 20,
+        "timingScope": "current-request"
+      },
+      "apply": {
+        "changes": [
+          {
+            "index": 0,
+            "objectPath": "Device/Plc Logic/Application/Library Manager",
+            "status": "APPLIED"
+          },
+          {
+            "index": 1,
+            "objectPath": "Device/Plc Logic/Application/FB_TemperaturePID",
+            "status": "APPLIED"
+          },
+          {
+            "index": 2,
+            "objectPath": "Device/Plc Logic/Application/PRG_TemperatureTest",
+            "status": "APPLIED"
+          },
+          {
+            "index": 3,
+            "objectPath": "Device/Plc Logic/Application/PLC_PRG",
+            "status": "APPLIED"
+          },
+          {
+            "index": 4,
+            "objectPath": "Device/Plc Logic/Application/Task Configuration/MainTask",
+            "status": "APPLIED"
+          },
+          {
+            "index": 5,
+            "objectPath": "Device/Plc Logic/Application/Trace_TemperatureCascade3",
+            "status": "APPLIED"
+          }
+        ],
+        "compilation": {
+          "buildCompleted": true,
+          "outcome": "passed"
+        },
+        "context": {
+          "applicationPath": "Device/Plc Logic/Application",
+          "projectEpoch": 2,
+          "watcherInstanceId": "893701146ba04dc0be6f6b15e0e26cce"
+        },
+        "counts": {
+          "compile": 1,
+          "nativeOperations": 45,
+          "save": 1,
+          "watcherCommands": 1
+        },
+        "data": {
+          "changed": true,
+          "projectFilePath": "D:\\CodesysApiMCP-V2\\V2.2.1\\retest-20261006-latest\\projects\\TemperatureCascade3_Codex_20261006.project",
+          "saved": true
+        },
+        "diagnostics": [
+          {
+            "message": "------ 开始编译应用程序 Device.Application -------",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "代码典型化...",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "Size of licensed usercode: 0 bytes",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "Memory usage on device, not used for licensing purposes:",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "完全编译 -- 0错误,0警告",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "其他代码检查...",
+            "nativeCodePrefix": "SA",
+            "severity": "info"
+          },
+          {
+            "message": "其他代码检查完成-0 个错误",
+            "nativeCodePrefix": "SA",
+            "severity": "info"
+          }
+        ],
+        "diagnosticsComplete": true,
+        "requestId": "three-stage-temperature-20261006",
+        "status": "PASS",
+        "timings": {
+          "admissionMs": 14.75690000038594,
+          "queueMs": 0.013700000010430813,
+          "dispatchPreparationMs": 8.279099999926984,
+          "compileMs": 426,
+          "nativeMs": 9343,
+          "transportMs": 10050.62259999942,
+          "totalMs": 10073.933100000024,
+          "coreMs": 23.296800000593066
+        },
+        "trace": {
+          "clock": "watcher-monotonic",
+          "nativeFinishedMs": 15819653.8442,
+          "nativeStartedMs": 15810310.7123
+        },
+        "queueOrdinal": 24,
+        "timingScope": "current-request"
+      },
+      "readback": {
+        "status": "PASS",
+        "baselineComplete": true,
+        "objectCount": 6,
+        "objectsWithReadReferences": 6,
+        "officialUtil": [
+          {
+            "version": "3.5.19.0",
+            "company": "System",
+            "namespace": "Util"
+          }
+        ],
+        "officialPIDFB": true,
+        "cycle010": true,
+        "task": "T#10ms",
+        "setpoints": true,
+        "trace": {
+          "name": "Trace_TemperatureCascade3",
+          "variableCount": 11,
+          "temperatureVariableCount": 8,
+          "outputVariableCount": 3,
+          "outputAxis": [
+            0,
+            100
+          ],
+          "scope": "offlineRecording",
+          "symbolValidation": "notPerformed"
+        }
+      },
+      "secondCompile": {
+        "compilation": {
+          "buildCompleted": true,
+          "outcome": "passed"
+        },
+        "context": {
+          "applicationPath": "Device/Plc Logic/Application",
+          "projectEpoch": 2,
+          "watcherInstanceId": "893701146ba04dc0be6f6b15e0e26cce"
+        },
+        "counts": {
+          "compile": 1,
+          "nativeOperations": 0,
+          "save": 0,
+          "watcherCommands": 1
+        },
+        "diagnostics": [
+          {
+            "message": "------ 开始编译应用程序 Device.Application -------",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "此应用程序是最新的",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "Size of licensed usercode: 0 bytes",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "Memory usage on device, not used for licensing purposes:",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "完全编译 -- 0错误,0警告",
+            "nativeCodePrefix": "C",
+            "severity": "info"
+          },
+          {
+            "message": "其他代码检查...",
+            "nativeCodePrefix": "SA",
+            "severity": "info"
+          },
+          {
+            "message": "其他代码检查完成-0 个错误",
+            "nativeCodePrefix": "SA",
+            "severity": "info"
+          }
+        ],
+        "diagnosticsComplete": true,
+        "requestId": "three-stage-final-compile-20261006",
+        "status": "PASS",
+        "timings": {
+          "admissionMs": 7.99860000051558,
+          "queueMs": 0.011799999512732029,
+          "dispatchPreparationMs": 5.360300000756979,
+          "compileMs": 55,
+          "nativeMs": 195,
+          "transportMs": 1135.7044999999925,
+          "totalMs": 1149.2735000001267,
+          "coreMs": 13.557200000621378
+        },
+        "trace": {
+          "clock": "watcher-monotonic",
+          "nativeFinishedMs": 15882863.7102,
+          "nativeStartedMs": 15882668.5614
+        },
+        "queueOrdinal": 26,
+        "timingScope": "current-request"
+      }
+    }
+  },
+  "recovery": {
+    "launch": {
+      "status": "STARTING",
+      "startedAt": "2026-10-05T18:03:08.163Z",
+      "processId": 15236,
+      "executablePath": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS\\Common\\CODESYS.exe",
+      "profileName": "CODESYS V3.5 SP19 Patch 5",
+      "additionalFolder": "C:\\Program Files\\CODESYS 3.5.19.50\\CODESYS",
+      "watcherPath": "D:\\CodesysApiMCP-V2\\V2.2.1\\installed\\watcher\\codesys_api_mcp_watcher.py"
+    },
+    "reconnected": "CONNECTED",
+    "launchToConnectedMs": 103718,
+    "compileError": {
+      "status": "FAIL",
+      "code": "COMPILE_ERRORS",
+      "counts": {
+        "compile": 1,
+        "nativeOperations": 1,
+        "save": 0,
+        "watcherCommands": 1
+      },
+      "diagnosticsComplete": true,
+      "diagnostic": "应该用表达式代替 ';'"
+    },
+    "repeatReceiptStable": true,
+    "repair": {
+      "status": "PASS",
+      "counts": {
+        "compile": 1,
+        "nativeOperations": 1,
+        "save": 1,
+        "watcherCommands": 1
+      },
+      "diagnosticsComplete": true
+    }
+  },
+  "workbuddy": {
+    "configDiagnosis": "DIAGNOSED",
+    "mcpServerConnected": true,
+    "toolCount": 8,
+    "agentTest": "BLOCKED_AUTHENTICATION_REQUIRED",
+    "userReportedLoggedIn": true
+  },
+  "timing": {
+    "startUtc": "2026-10-05T18:05:31.303Z",
+    "endUtc": "2026-10-05T18:10:32.914Z",
+    "wallElapsedMs": 301611,
+    "recordedMcpCallDurationMs": 44525.27650000001,
+    "betweenCallsMs": 257085.7235,
+    "calls": [
+      {
+        "file": "three-stage-create2.json",
+        "durationMs": 16406.054
+      },
+      {
+        "file": "three-stage-baseline.json",
+        "durationMs": 2460.7501
+      },
+      {
+        "file": "three-stage-util-search.json",
+        "durationMs": 757.1787
+      },
+      {
+        "file": "three-stage-util-installed.json",
+        "durationMs": 1854.4611999999997
+      },
+      {
+        "file": "three-stage-apply.json",
+        "durationMs": 10087.785300000001
+      },
+      {
+        "file": "three-stage-verify.json",
+        "durationMs": 2812.7081
+      },
+      {
+        "file": "three-stage-final-compile.json",
+        "durationMs": 1159.6629
+      },
+      {
+        "file": "compile-fail-injection.json",
+        "durationMs": 1818.0642000000003
+      },
+      {
+        "file": "compile-fail-status1.json",
+        "durationMs": 9.129599999999982
+      },
+      {
+        "file": "compile-fail-status2.json",
+        "durationMs": 8.0317
+      },
+      {
+        "file": "compile-fail-readback.json",
+        "durationMs": 1406.5879
+      },
+      {
+        "file": "compile-fail-json-read.json",
+        "durationMs": 850.6918
+      },
+      {
+        "file": "compile-recovery.json",
+        "durationMs": 2132.8986999999997
+      },
+      {
+        "file": "three-stage-final-readback.json",
+        "durationMs": 2761.2723
+      }
+    ]
+  },
+  "runtime": {
+    "plcDownloadOrOnlineRun": false,
+    "traceScope": "offlineRecording",
+    "symbolValidation": "notPerformed"
+  }
+}
+
