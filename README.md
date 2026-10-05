@@ -2,6 +2,13 @@
 
 本仓库仅用于发布 Windows 安装包。产品开发源码保存在独立私有仓库，不在此仓库发布。
 
+## V2.2.1（当前版本）
+
+- [公开下载完整安装包（约 156 MB，无需登录）](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.1/CodesysApiMCP-2.2.1-Windows-x64-Full.zip)
+- [版本说明与校验清单](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/tag/v2.2.1)
+- 完整解压后运行 Setup.exe；随包提供运行环境及安装使用手册。开发源码仓库继续保持私有。
+- SHA-256：`588ff6588d7fcffbd36bb8cbb0b5ab42306a676ec30d5f06cc5a5b1fb6ab6931`
+
 ## V2.0.4
 
 - 系统：Windows x64。
