@@ -1,24 +1,28 @@
 # CODESYS API MCP 安装包下载
 
-本仓库仅用于发布 Windows 安装包。产品开发源码保存在独立私有仓库，不在此仓库发布。
+本仓库发布 Windows 安装包；开发源码保存在独立私有仓库。
 
-## V2.2.1（当前版本）
+## V2.2.2（当前版本）
 
-- [公开下载完整安装包（约 156 MB，无需登录）](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.1/CodesysApiMCP-2.2.1-Windows-x64-Full.zip)
-- [版本说明与校验清单](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/tag/v2.2.1)
-- 完整解压后运行 Setup.exe；随包提供运行环境及安装使用手册。开发源码仓库继续保持私有。
-- SHA-256：`588ff6588d7fcffbd36bb8cbb0b5ab42306a676ec30d5f06cc5a5b1fb6ab6931`
+- [下载完整安装包（约 154 MB，无需登录）](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/CodesysApiMCP-2.2.2-Windows-x64-Full.zip)
+- [版本说明和全部附件](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/tag/v2.2.2)
+- [独立使用说明](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/CodesysApiMCP-2.2.2-Manual.html)
+- [统一 Skill](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/CodesysApiMCP-2.2.2-Skill.zip)
+- [SHA-256 校验清单](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/SHA256SUMS.txt)
 
-## V2.0.4
+完整包 SHA-256：`b301073a9332fa6d9aa5fbf2fad9fe49d3c9b07b905da125b304aeda3f8518e8`
 
-- 系统：Windows x64。
-- [下载安装程序](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.0.4/Codesys-API-MCP-2.0.4-Windows-x64.exe)
-- SHA-256：`FC46D619FE904FBA1A304F7869D6B60BFA22C983AFCA1F4AC9F5E9874B2B9DC8`
+完整解压后运行 `Setup.exe`。包内提供运行环境、.NET Framework 4.8 离线前置组件、同版说明书与 Skill。安装后从桌面启动 Manager，在“CODESYS 设置”保存版本及实例，在“Agent 接入”生成客户端配置和入门说明；客户端重新加载 MCP 后，先读入门说明并调用 `codesys_status` 确认连接。
 
-安装包包含 Manager、MCP 运行组件、私有运行环境及同版技能，并提供 Codex、Claude Code、TRAE 国内版、WorkBuddy 的接入提示词。CODESYS 软件、AI 客户端和本机产品授权须另行具备。
+2.2.2 支持 Agent 通过 `codesys_project_connect` 连接并打开指定现有工程：采用 Manager 保存的版本与实例；已有相同工程且连接身份一致时复用；其他工程、Watcher 占用、版本不符或忙状态会明确阻断。已手动打开工程时，使用当前 Manager 提供的 Watcher 脚本路径运行脚本，再确认 PID 与工程。切换工程遵循说明书中的显式打开流程。
 
-本版在 Windows x64、CODESYS SP19 Patch 6 的本机隔离环境完成安装、自检和公共 MCP 九工具握手。Patch 5、跨电脑以及 TRAE/WorkBuddy 的真实客户端连接仍待测试。
+Manager 提供 Agent 入门说明预览、复制与导出，涵盖当前工具用法、错误处理和 Skill 启用方法。桌面有 Manager 与使用说明入口；托盘颜色和 PID 信息辅助识别连接。包内集成 SP18 Patch 6、SP19 Patch 5、SP19 Patch 6、SP20 Patch 6 四份初始模板。创建其他模板时，需同时匹配编译器与设备描述版本。
 
-安装后从桌面或开始菜单启动 Manager，在“连接与配置”选择对应客户端。配置完成后，在客户端重载 MCP，用只读能力检索确认连接。配置写入成功不代表客户端已经连接。
+本版完成四版本限定连接边界、已有工程手动 Watcher 连接、客户端工程场景、真实 Codex 温控工程编译保存与 Trace 自动配置、本地软件仿真监控，以及完整包独立审计。验收范围详见发布说明；没有物理 PLC 或新干净虚拟机验收。配置文件写入成功不代表客户端当前会话已经加载。
 
-安装程序包含产品必需的可执行运行脚本；不包含 TypeScript/C# 开发源码、测试夹具、开发依赖、用户许可证或凭据。
+CODESYS 软件、AI 客户端和产品授权须另行具备。公开包不含用户许可证、凭据、私钥、开发依赖或测试工程。
+
+## 历史版本
+
+- [V2.2.1 发布记录](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/tag/v2.2.1)
+- [V2.0.4 发布记录](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/tag/v2.0.4)
