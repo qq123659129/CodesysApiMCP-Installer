@@ -22,7 +22,4 @@ Manager 提供 Agent 入门说明预览、复制与导出，涵盖当前工具�
 
 CODESYS 软件、AI 客户端和产品授权须另行具备。公开包不含用户许可证、凭据、私钥、开发依赖或测试工程。
 
-## 历史版本
-
-- [V2.2.1 发布记录](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/tag/v2.2.1)
-- [V2.0.4 发布记录](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/tag/v2.0.4)
+历史安装包已下架，当前公开下载版本为 2.2.2。
