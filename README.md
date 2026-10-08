@@ -4,13 +4,15 @@
 
 ## V2.2.2（当前版本）
 
-- [下载完整安装包（约 154 MB，无需登录）](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/CodesysApiMCP-2.2.2-Windows-x64-Full.zip)
+2026-10-08 重新构建完整安装包，包含已验收的小优化、具体故障提示，以及历史快捷入口配置和文本编码的兼容修复。软件版本仍为 2.2.2。准备快捷入口后，命令在下次正常启动 CODESYS 时加载，再从“工具 → 自定义”添加。
+
+- [下载完整安装包（约 155 MB，无需登录）](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/CodesysApiMCP-2.2.2-Windows-x64-Full-20261008.zip)
 - [版本说明和全部附件](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/tag/v2.2.2)
 - [独立使用说明](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/CodesysApiMCP-2.2.2-Manual.html)
 - [统一 Skill](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/CodesysApiMCP-2.2.2-Skill.zip)
-- [SHA-256 校验清单](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/SHA256SUMS.txt)
+- [SHA-256 校验清单](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.2/SHA256SUMS-20261008.txt)
 
-完整包 SHA-256：`b301073a9332fa6d9aa5fbf2fad9fe49d3c9b07b905da125b304aeda3f8518e8`
+完整包 SHA-256：`fc47df1745e0a988673a46953c6dd2d5d28d489009154c06bf6cb879712f6764`
 
 完整解压后运行 `Setup.exe`。包内提供运行环境、.NET Framework 4.8 离线前置组件、同版说明书与 Skill。安装后从桌面启动 Manager，在“CODESYS 设置”保存版本及实例，在“Agent 接入”生成客户端配置和入门说明；客户端重新加载 MCP 后，先读入门说明并调用 `codesys_status` 确认连接。
 
