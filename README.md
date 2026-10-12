@@ -2,7 +2,26 @@
 
 本仓库发布 Windows 安装包；开发源码保存在独立私有仓库。
 
-## V2.2.2（当前版本）
+## V2.2.3（当前版本）
+
+2026-10-12 发布。MCP、Manager 和 Skill 已完成完整功能审查及本轮必要修复。Claude 桌面、DeepSeek Harness、TRAE、WorkBuddy 完成全新接入及历史升级业务；字符串读写、批量读取改善、托盘清理及同会话连接恢复已有实际证据。
+
+**验收结论为有条件通过：历史长等待原因仍未查明，独立新 Windows 等已批准范围未实测。** 详细边界见完整验收摘要，不将本机结果当作所有环境通过。
+
+- [MCP 安装包（约32 MB）](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.3/CodesysApiMCP-2.2.3-Windows-x64-MCP.zip)
+- [独立 .NET 4.8 环境包（约116 MB，仅缺依赖时使用）](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.3/CodesysApiMCP-Environment-netfx-4.8-0a3a390c47e639d0f7fc65b21195fee6b7f65b066f80f70c60fab191d14b7e40.zip)
+- [Skill 导入包](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.3/codesys-v2-2-builder.zip)
+- [使用说明与高级说明](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.3/Manuals-2.2.3.zip)
+- [完整验收摘要](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.3/ACCEPTANCE-2.2.3.md)
+- [SHA-256 校验清单](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/download/v2.2.3/SHA256SUMS.txt)
+- [版本说明和全部附件](https://github.com/qq123659129/CodesysApiMCP-Installer/releases/tag/v2.2.3)
+- [源码 release/v2.2.3（需私有仓库权限）](https://github.com/qq123659129/CodesysApiMCP-V2.2/tree/release/v2.2.3)
+
+完整解压 MCP 包后运行 `Setup.exe`；升级沿用原安装目录和数据目录。环境已就绪时只下载新版 MCP 包，独立环境包无需随更新重装。环境包仅为 .NET Framework 4.8 前置组件，不含 CODESYS IDE 或虚拟机。遇到问题先看 Manager 提示，必要时导出问题记录。
+
+模板已包含 SP18 Patch 6、SP19 Patch 5/6、SP20 Patch 6、SP21 Patch 4；SP21 仅资源验收。CODESYS 软件、AI 客户端及产品授权另行具备。公开附件不含用户许可证、凭据、配置或原始测试日志。
+
+## V2.2.2（历史版本）
 
 2026-10-08 快捷入口同类故障修复版完整包：包含此前四项小优化，以及旧配置兼容、字段校验、缺失文件和可核验元数据恢复、重复项合并、失败恢复及明确的“备份并重建配置”操作。软件版本仍为 2.2.2。91 项辅助程序、7 项原有安全回归、26 项隐藏 Manager 流程、8 项封包运行检查和隔离安装/卸载通过；不代表其他电脑或真实 IDE 重新实测。准备后，命令在 CODESYS 下次正常启动时加载，再从“工具 → 自定义”添加。
 
@@ -24,4 +43,4 @@ Manager 提供 Agent 入门说明预览、复制与导出，涵盖当前工具�
 
 CODESYS 软件、AI 客户端和产品授权须另行具备。公开包不含用户许可证、凭据、私钥、开发依赖或测试工程。
 
-历史安装包已下架，当前公开下载版本为 2.2.2。
+上文链接为保留的2.2.2历史附件；当前版本见本页2.2.3入口。
